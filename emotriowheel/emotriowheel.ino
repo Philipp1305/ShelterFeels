@@ -27,7 +27,7 @@ void countEmo(int& counter, int& buttonState, int buttonKind, int emotion){
     if (counter == 4){
       counter = 0;
     }
-    delay(500);
+    delay(200);
   }
 
   switch (counter)
