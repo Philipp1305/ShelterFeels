@@ -1,0 +1,8 @@
+openai-whisper
+sounddevice
+scipy
+transformers
+sentencepiece
+pytest
+setuptools-rust
+nltk
