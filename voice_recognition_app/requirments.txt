@@ -1,8 +1,10 @@
 openai-whisper
 sounddevice
+soundfile
 scipy
 transformers
 sentencepiece
 pytest
 setuptools-rust
 nltk
+# ffmpeg!!! 

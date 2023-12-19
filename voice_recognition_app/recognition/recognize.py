@@ -1,5 +1,5 @@
 import whisper
-
+import torch
 
 def recognize_audio_file(filepath: str) -> str:
     """
@@ -7,5 +7,8 @@ def recognize_audio_file(filepath: str) -> str:
     :return: text from audio
     """
     model = whisper.load_model("base")
-    result = model.transcribe(filepath)
+    if torch.cuda.is_available():
+        result = model.transcribe(filepath)
+    else:
+        result = model.transcribe(filepath, fp16=False)
     return result["text"]

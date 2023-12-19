@@ -1,9 +1,13 @@
-from recognition.audio_utils import record_wav
+from recognition.audio_utils import record_wav_n_seconds, record_untill_interrupt
 
 
 def test_record_short():
-    record_wav(5)  # FIXME doesnt work in wsl/no device found
+    record_wav_n_seconds(5) 
 
 
 def test_record_long():
-    record_wav(20)  # FIXME doesnt work in wsl/no device found
+    record_wav_n_seconds(20)  
+
+def test_record_unlimeted(): # no control cant stop using pytest
+    file = record_untill_interrupt()
+    print(file)

@@ -24,10 +24,8 @@ def extract_key_words(text: str) -> str:
     :return: with keywords
     """
     input_sequences = [task_prefix + text]
-    input_ids = tokenizer(
-        input_sequences, return_tensors="pt", truncation=True
-    ).input_ids
-    output = model.generate(input_ids, no_repeat_ngram_size=3, num_beams=4)
+    input_ids = tokenizer(input_sequences, return_tensors="pt", truncation=True).input_ids
+    output = model.generate(input_ids, no_repeat_ngram_size=3, num_beams=4, max_new_tokens=10)
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
 
