@@ -25,7 +25,7 @@ def extract_key_words(text: str) -> str:
     """
     input_sequences = [task_prefix + text]
     input_ids = tokenizer(input_sequences, return_tensors="pt", truncation=True).input_ids
-    output = model.generate(input_ids, no_repeat_ngram_size=3, num_beams=4, max_new_tokens=10)
+    output = model.generate(input_ids, no_repeat_ngram_size=3, num_beams=4, max_new_tokens=200, min_new_tokens=20)
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
 
