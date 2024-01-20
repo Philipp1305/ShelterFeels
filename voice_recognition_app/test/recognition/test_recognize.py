@@ -1,6 +1,7 @@
 from recognition.recognize import recognize_audio_file
 from config import records_folder
 
+
 def test_recognition():
     file = records_folder / "2023 12 19 - 10-43-01.wav"
     print(file)

@@ -7,4 +7,5 @@ sentencepiece
 pytest
 setuptools-rust
 nltk
-# ffmpeg!!! 
+setuptools-rust
+# ffmpeg in your system!!!

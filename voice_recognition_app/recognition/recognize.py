@@ -1,11 +1,13 @@
 import whisper
 import torch
 
+
 def recognize_audio_file(filepath: str) -> str:
     """
     :param filepath: path to audio file
     :return: text from audio
     """
+    print("Recognizing: ", filepath)
     model = whisper.load_model("base")
     if torch.cuda.is_available():
         result = model.transcribe(filepath)
