@@ -10,6 +10,8 @@ import numpy as np
 from config import records_folder
 
 q = queue.Queue()
+#print(sd.default.device)
+sd.default.device = [2, 2]
 
 
 def record_wav_n_seconds(seconds: int = 3, rate: int = 44100):
@@ -35,24 +37,18 @@ def callback(indata, frames, time, status):
 
 def record_until_interrupt(rate: int = 44100):
     filename = records_folder / f'{datetime.now().strftime("%Y %m %d - %H-%M-%S")}.wav'
+    print('devices',sd.query_devices())
     try:
-        with sf.SoundFile(str(filename), mode='x', channels=2, samplerate=rate) as file:
+        with sf.SoundFile(str(filename), mode='x', channels=1, samplerate=rate) as file:
             with sd.InputStream(callback=callback, samplerate=rate):
                 print('#' * 80)
                 print('press Ctrl+C to stop the recording')
                 print('#' * 80)
                 while True:
                     que = q.get()
-                    shape = np.shape(que)
-                    if len(shape) == 1 or shape[1] == 1:
-                        # mono
-                        file.write(np.stack([que, que]))
-                    elif shape[1] == 2:
-                        # stereo
-                        file.write(que)
-                    else:
-                        # more than stereo
-                        file.write(que[:, :2])
+                    #shape = np.shape(que)
+                    #print(shape)
+                    file.write(que)
     except KeyboardInterrupt:
         print('\nRecording finished: ' + str(filename))
     return filename

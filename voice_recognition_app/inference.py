@@ -1,4 +1,5 @@
 from typing import List
+from datetime import datetime
 
 from recognition.recognize import recognize_audio_file
 from recognition.audio_utils import record_until_interrupt
@@ -11,13 +12,22 @@ def extract_key_words_audio() -> List[str]:
     :return: list of strings with keywords
     """
     print("Recording! \nTo stop recording please eneter Ctrl+C")
+    start = datetime.now()
     audiofile = record_until_interrupt()
+    processing_start = datetime.now()
     print("Processing...")
+    recognition_start = datetime.now()
+    print('recording:', (processing_start-start))
     text = recognize_audio_file(str(audiofile))
     print("Text:", text)
     with open(records_folder / f"{audiofile.stem}.txt", "w") as f:
         f.write(text)
-    return extract_key_words_text(text)
+    keywords_start = datetime.now()
+    print('recognistion:', (keywords_start-recognition_start))
+    keywords = extract_key_words_text(text)
+    keywords_finish = datetime.now()
+    print('keywordextraction:', (keywords_finish-keywords_start))
+    return keywords
 
 
 def extract_key_words_text(text: str) -> List[str]:

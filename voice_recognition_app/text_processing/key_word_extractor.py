@@ -50,4 +50,5 @@ def postprocess_keywords(keywords: str, only_nouns=True) -> List[str]:
         tags = nltk.pos_tag(tokens)
         nouns = [word for word, pos in tags if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS')]
         words = nouns
+        # no single-double letter words and add verbs 
     return words
