@@ -63,11 +63,17 @@ def next_button(label_text_list: List[str], label: Label, window: Tk) -> None:
         i = 0
 
 
-def build_window():
+def build_window(keywords: List[str] = [
+    'Hello, ma baby!',
+    'Hello, ma honey!',
+    'Hello, ma ragtime gaaaaaal!',
+    'Send me a kiss by wire',
+    'Baby, my heart\'s on fire!',
+    ]
+):
     '''serves as main for now'''
 
     width_height = 480
-    keywords = ['Hello, ma baby!', 'Hello, ma honey!', 'Hello, ma ragtime gaaaaaal!', 'Send me a kiss by wire', 'Baby, my heart\'s on fire!']
 
     tk = Tk()
     tk.configure(bg='red')
