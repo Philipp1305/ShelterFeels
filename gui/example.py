@@ -1,4 +1,10 @@
-from tkinter import Tk, Label
+from tkinter import Tk, Label, Button
+
+from typing import List
+from random import choice
+
+
+i = 1
 
 
 def center_window(window: Tk) -> None:
@@ -18,40 +24,64 @@ def center_window(window: Tk) -> None:
     window.geometry(f'{width}x{height}+{x}+{y}')
 
 
-def insert_label(new_label: str, window: Tk, old_label: Label = None) -> Label:
+def insert_label(label_text: str, window: Tk) -> Label:
     '''
-    gives you a semi entered text in the given window
+    gives you a singular semi centered text in the given window
     :param new_label: any string, preferably not too long
     :param window: tkinter Tk object. should be a toplevel window, not a widget
-    :param old_label: a label created with insert_label
     :return: tkinter Label object we just inserted
     '''
 
-    if old_label:
-        old_label.destroy()
-
-    label = Label(window, text=new_label, font=('Comic Sans MS', 18))
+    label = Label(window, text=label_text, font=('Comic Sans MS', 18))
 
     label_height = int(window.winfo_height()/2 - 30)
-    label.pack(pady=label_height)
+    label.pack(pady=label_height) # TODO: absolute positions
 
     return label
+
+
+def next_button(label_text_list: List[str], label: Label, window: Tk) -> None:
+    '''
+    sets label text by iterating over list with a global variable i
+    :label_text_list: list of text we want to iterate over
+    :label: tkinter Label object
+    :canvas: tkinter Canvas object to change color
+    '''
+    color = choice(["red" , "green" , "blue"])  # TODO: obviously, we need a static color picking system
+
+    window.configure(bg=color)
+    if color == 'blue':
+        label.config(fg='white')
+    else:
+        label.config(fg='black')
+
+    global i # TODO: find solution that doesn't use global variables (probably just wrap in global object and write iterator)
+    label.config(text=label_text_list[i], bg=color)
+
+    i += 1
+    if i >= len(label_text_list):
+        i = 0
 
 
 def build_window():
     '''serves as main for now'''
 
     width_height = 480
+    keywords = ['Hello, ma baby!', 'Hello, ma honey!', 'Hello, ma ragtime gaaaaaal!', 'Send me a kiss by wire', 'Baby, my heart\'s on fire!']
 
     tk = Tk()
+    tk.configure(bg='red')
     tk.resizable(False, False)
-    tk.overrideredirect(True)
+    # tk.overrideredirect(True)
 
     tk.geometry(f'{width_height}x{width_height}')
     center_window(tk)
 
-    label = insert_label('Hello', tk)
-    label = insert_label('World', tk, label)
+    label = insert_label(keywords[0], tk)
+    label.config(bg='red')
+
+    button = Button(tk, text='NEXT', command=lambda: next_button(keywords, label, tk))
+    button.pack()
 
     tk.mainloop()
 
