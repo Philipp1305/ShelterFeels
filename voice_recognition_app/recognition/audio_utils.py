@@ -5,13 +5,10 @@ from datetime import datetime
 import sounddevice as sd
 import soundfile as sf
 from scipy.io.wavfile import write
-import numpy as np
 
-from config import records_folder
+from config import records_folder, number_of_audio_channels_in
 
 q = queue.Queue()
-#print(sd.default.device)
-sd.default.device = [2, 2]
 
 
 def record_wav_n_seconds(seconds: int = 3, rate: int = 44100):
@@ -39,15 +36,13 @@ def record_until_interrupt(rate: int = 44100):
     filename = records_folder / f'{datetime.now().strftime("%Y %m %d - %H-%M-%S")}.wav'
     print('devices',sd.query_devices())
     try:
-        with sf.SoundFile(str(filename), mode='x', channels=1, samplerate=rate) as file:
+        with sf.SoundFile(str(filename), mode='x', channels=number_of_audio_channels_in, samplerate=rate) as file:
             with sd.InputStream(callback=callback, samplerate=rate):
                 print('#' * 80)
                 print('press Ctrl+C to stop the recording')
                 print('#' * 80)
                 while True:
                     que = q.get()
-                    #shape = np.shape(que)
-                    #print(shape)
                     file.write(que)
     except KeyboardInterrupt:
         print('\nRecording finished: ' + str(filename))
