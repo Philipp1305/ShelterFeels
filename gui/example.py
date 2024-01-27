@@ -35,7 +35,7 @@ def insert_label(label_text: str, window: Tk) -> Label:
     label = Label(window, text=label_text, font=('Comic Sans MS', 18))
 
     label_height = int(window.winfo_height()/2 - 30)
-    label.pack(pady=label_height) # TODO: absolute positions
+    label.pack(pady=label_height-100) # TODO: absolute positions
 
     return label
 
@@ -73,7 +73,7 @@ def build_window(keywords: List[str] = [
 ):
     '''serves as main for now'''
 
-    width_height = 480
+    width_height = 400
 
     tk = Tk()
     tk.configure(bg='red')
@@ -86,7 +86,7 @@ def build_window(keywords: List[str] = [
     label = insert_label(keywords[0], tk)
     label.config(bg='red')
 
-    button = Button(tk, height=100, width=100, text='NEXT', command=lambda: next_button(keywords, label, tk))
+    button = Button(tk, text='NEXT', command=lambda: next_button(keywords, label, tk))
     button.pack()
 
     tk.mainloop()
