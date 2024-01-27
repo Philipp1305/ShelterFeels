@@ -20,7 +20,7 @@ def extract_key_words_audio() -> List[str]:
     recognition_start = datetime.now()
     print('Recording time:', (processing_start - start))
     text = recognize_audio_file(str(audiofile))
-    print("Text:", text)
+    print("Recognized text:", text)
     with open(records_folder / f"{audiofile.stem}.txt", "w") as f:
         f.write(text)
     keywords_start = datetime.now()
@@ -44,4 +44,4 @@ def extract_key_words_text(text: str) -> List[str]:
 
 if __name__ == "__main__":
     kw = extract_key_words_audio()
-    print("post-processed key words:", kw)
+    print("Post-processed key words:", kw)

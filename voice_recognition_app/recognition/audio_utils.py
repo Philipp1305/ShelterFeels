@@ -34,7 +34,6 @@ def callback(indata, frames, time, status):
 
 def record_until_interrupt(rate: int = 44100):
     filename = records_folder / f'{datetime.now().strftime("%Y %m %d - %H-%M-%S")}.wav'
-    print('devices',sd.query_devices())
     try:
         with sf.SoundFile(str(filename), mode='x', channels=number_of_audio_channels_in, samplerate=rate) as file:
             with sd.InputStream(callback=callback, samplerate=rate):

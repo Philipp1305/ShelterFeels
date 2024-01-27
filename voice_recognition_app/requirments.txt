@@ -7,5 +7,7 @@ sentencepiece
 pytest
 setuptools-rust
 nltk
-setuptools-rust
+fastapi
+uvicorn
+python-multipart
 # ffmpeg in your system!!!

@@ -1,4 +1,5 @@
 from recognition.audio_utils import record_wav_n_seconds, record_until_interrupt
+import sounddevice as sd
 
 
 def test_record_short():
@@ -12,3 +13,7 @@ def test_record_long():
 def test_record_unlimeted():  # no control cant stop using pytest
     file = record_until_interrupt()
     print(file)
+
+
+def test_audio_devices_list():
+    print('devices', sd.query_devices())
