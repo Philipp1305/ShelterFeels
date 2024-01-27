@@ -1,15 +1,25 @@
 import uvicorn as uvicorn
 from fastapi import FastAPI, UploadFile, File
+from inference_local import extract_key_words_text
 
-from utils import save_upload_file
 from config import records_folder
+from recognition.recognize import recognize_audio_file
+from utils import save_upload_file
 
 app = FastAPI()
 
 
 @app.post('/extract_key_words')
 def extract_key_words_endpoint(file: UploadFile = File(...)):
-    save_upload_file(records_folder / file.filename, file)
+    print(file.filename)
+    audiofile = save_upload_file(records_folder / file.filename, file)
+    print(audiofile)
+    text = recognize_audio_file(str(audiofile))
+    print("Recognized text:", text)
+    with open(records_folder / f"{audiofile.stem}.txt", "w", encoding="utf-8") as f:
+        f.write(text)
+    keywords = extract_key_words_text(text)
+    return keywords
 
 
 @app.get('/liveness_check')

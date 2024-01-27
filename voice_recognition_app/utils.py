@@ -5,7 +5,7 @@ from pathlib import Path
 from fastapi import UploadFile
 
 
-def save_upload_file(local_path: Path, upload_file: UploadFile) -> None:
+def save_upload_file(local_path: Path, upload_file: UploadFile) -> Path:
     """
     Saved upload_file into local_archive_path
     Args:
@@ -18,3 +18,4 @@ def save_upload_file(local_path: Path, upload_file: UploadFile) -> None:
             shutil.copyfileobj(upload_file.file, buffer)
     finally:
         upload_file.file.close()
+    return local_path

@@ -18,11 +18,13 @@ def extract_key_words_online() -> List[str]:
     print("Processing...")
     print('Recording time:', (processing_start - start))
     return send_post(str(audiofile))
-    
-def send_post(file):
+
+
+def send_post(file) -> List[str]:
     res = requests.post(url, files={'file': open(file, 'rb')})
-    print(res.json())
+    return res.json()
+
 
 if __name__ == "__main__":
-    kw = extract_key_words_online()
+    kw = extract_key_words_online()  # target function
     print("Post-processed key words:", kw)
