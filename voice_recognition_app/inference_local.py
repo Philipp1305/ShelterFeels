@@ -4,7 +4,7 @@ from datetime import datetime
 from recognition.recognize import recognize_audio_file
 from recognition.audio_utils import record_until_interrupt
 from text_processing.key_word_extractor import extract_key_words, postprocess_keywords
-from config import records_folder
+from config import records_folder, url
 
 
 def extract_key_words_audio() -> List[str]:
@@ -40,7 +40,6 @@ def extract_key_words_text(text: str) -> List[str]:
     print("Key words:", keywords)
     result = postprocess_keywords(keywords)
     return result
-
 
 if __name__ == "__main__":
     kw = extract_key_words_audio()
