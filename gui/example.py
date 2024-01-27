@@ -86,7 +86,7 @@ def build_window(keywords: List[str] = [
     label = insert_label(keywords[0], tk)
     label.config(bg='red')
 
-    button = Button(tk, text='NEXT', command=lambda: next_button(keywords, label, tk))
+    button = Button(tk, height=100, width=100, text='NEXT', command=lambda: next_button(keywords, label, tk))
     button.pack()
 
     tk.mainloop()
