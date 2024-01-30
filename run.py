@@ -11,6 +11,7 @@ def run():
     Step 3: Show result on window
     '''
 
+    # TODO: clean up directories
     main()
 
 
