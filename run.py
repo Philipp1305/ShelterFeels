@@ -1,5 +1,6 @@
 from gui.main import main
 # from voice_recognition_app.inference_remote import extract_key_words_online
+from voice_recognition_app.inference_local import extract_key_words_audio
 
 
 def run():
@@ -9,6 +10,7 @@ def run():
     Step 2: Start the extraction
     Step 3: Show result on window
     '''
+
     main()
 
 
