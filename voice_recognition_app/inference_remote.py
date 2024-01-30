@@ -2,8 +2,8 @@ from typing import List
 from datetime import datetime
 import requests
 
-from recognition.audio_utils import record_until_interrupt
-from config import url
+from voice_recognition_app.recognition.audio_utils import record_until_interrupt
+from voice_recognition_app.config import url
 
 
 def extract_key_words_online() -> List[str]:

@@ -1,27 +1,8 @@
-from tkinter import Tk, Label, Button
+from gui.counter import counter
 
+from tkinter import Tk, Label
 from typing import List
 from random import choice
-
-
-i = 1
-
-
-def center_window(window: Tk) -> None:
-    '''
-    centers a window on any screen (respects titlebar)
-    :param window: tkinter Tk object. should be a toplevel window, not a widget
-    '''
-
-    window.update_idletasks()
-
-    width = window.winfo_width()
-    height = window.winfo_height()
-
-    x = int(window.winfo_screenwidth()/2 - width/2)
-    y = int(window.winfo_screenheight()/2 - height/2)
-
-    window.geometry(f'{width}x{height}+{x}+{y}')
 
 
 def insert_label(label_text: str, window: Tk) -> Label:
@@ -55,42 +36,28 @@ def next_button(label_text_list: List[str], label: Label, window: Tk) -> None:
     else:
         label.config(fg='black')
 
-    global i # TODO: find solution that doesn't use global variables (probably just wrap in global object and write iterator)
-    label.config(text=label_text_list[i], bg=color)
+    label.config(text=label_text_list[counter.button_count], bg=color)
 
-    i += 1
-    if i >= len(label_text_list):
-        i = 0
+    counter.button_count += 1
+    if counter.button_count >= len(label_text_list):
+        counter.button_count = 0
 
 
-def build_window(keywords: List[str] = [
+def add_keywords(window: Tk,
+                 keywords: List[str] = [
     'Hello, ma baby!',
     'Hello, ma honey!',
     'Hello, ma ragtime gaaaaaal!',
     'Send me a kiss by wire',
     'Baby, my heart\'s on fire!',
     ]
-):
-    '''serves as main for now'''
+    ) -> None:
+    '''for adding the keywords extracted by voice_recognition inference'''
 
-    width_height = 400
-
-    tk = Tk()
-    tk.configure(bg='red')
-    tk.resizable(False, False)
-    # tk.overrideredirect(True)
-
-    tk.geometry(f'{width_height}x{width_height}')
-    center_window(tk)
-
-    label = insert_label(keywords[0], tk)
+    label = insert_label(keywords[0], window)
     label.config(bg='red')
 
-    button = Button(tk, text='NEXT',height=200, width=200, command=lambda: next_button(keywords, label, tk))
-    button.pack()
 
-    tk.mainloop()
+    window.bind("<Button-1>", lambda event: next_button(keywords, label, window))
 
-
-if __name__ == "__main__":
-    build_window()
+    return
