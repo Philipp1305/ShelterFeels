@@ -8,4 +8,4 @@ url = "http://10.147.19.228:8000/extract_key_words"
 whisper_model_name = "base"
 whisper_model_language = "en"
 number_of_audio_channels_in = 1
-sd.default.device = [2, 2]
+sd.default.device = [1, 1]
