@@ -1,17 +1,14 @@
 '''
-because the canonical way to manipulate a window in tkinter is .after()
-we should implement the window as the main function
+because the canonical way to manipulate a root in tkinter is .after()
+we should implement the root as the main function
 '''
 from gui.base_window import center_window
 from gui.keyword_handler import add_keywords
 from tkinter import Tk
 
-def on_click(event):
-    print("you clicked")
-
 
 def main():
-    '''builds a base window. all other functions follow afterwards'''
+    '''builds a root window. all other functions follow afterwards'''
 
     width_height = 400
 
@@ -23,10 +20,9 @@ def main():
     root.geometry(f'{width_height}x{width_height}')
     center_window(root)
 
-    # add_keywords(root)
 
-    # this will allow us to build a window and then do some action. ANY action
-    root.after(1000, add_keywords(root))
+    # this will allow us to build a root and then do some action. ANY action
+    root.after(1000, lambda: add_keywords(root))
 
     root.mainloop()
 

@@ -2,7 +2,6 @@ from gui.counter import counter
 
 from tkinter import Tk, Label
 from typing import List
-from random import choice
 
 
 def insert_label(label_text: str, window: Tk) -> Label:
@@ -16,7 +15,7 @@ def insert_label(label_text: str, window: Tk) -> Label:
     label = Label(window, text=label_text, font=('Comic Sans MS', 18))
 
     label_height = int(window.winfo_height()/2 - 30)
-    label.pack(pady=label_height-100) # TODO: absolute positions
+    label.pack(pady=label_height) # TODO: absolute positions
 
     return label
 
@@ -28,8 +27,8 @@ def next_button(label_text_list: List[str], label: Label, window: Tk) -> None:
     :label: tkinter Label object
     :canvas: tkinter Canvas object to change color
     '''
-    color = choice(["red" , "green" , "blue"])  # TODO: obviously, we need a static color picking system
 
+    color = counter.loop_color()
     window.configure(bg=color)
     if color == 'blue':
         label.config(fg='white')
@@ -56,7 +55,6 @@ def add_keywords(window: Tk,
 
     label = insert_label(keywords[0], window)
     label.config(bg='red')
-
 
     window.bind("<Button-1>", lambda event: next_button(keywords, label, window))
 
