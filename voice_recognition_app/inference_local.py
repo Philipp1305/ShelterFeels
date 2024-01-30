@@ -1,10 +1,10 @@
 from typing import List
 from datetime import datetime
 
-from recognition.recognize import recognize_audio_file
-from recognition.audio_utils import record_until_interrupt
-from text_processing.key_word_extractor import extract_key_words, postprocess_keywords
-from config import records_folder, url
+from voice_recognition_app.recognition.recognize import recognize_audio_file
+from voice_recognition_app.recognition.audio_utils import record_until_interrupt
+from voice_recognition_app.text_processing.key_word_extractor import extract_key_words, postprocess_keywords
+from voice_recognition_app.config import records_folder
 
 
 def extract_key_words_audio() -> List[str]:
