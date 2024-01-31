@@ -11,13 +11,21 @@ class Day(Enum):
     sunday= 5
     saturday= 6
     
-# class Emotion(Enum):
-#     first = 1
-#     second = 2
+class Emotion(Enum):
+    joyful = (255,255,0)
+    powerful = (0,153,51)
+    peaceful = (51,51,255)
+    sad = (153,51,153)
+    mad = (255,0,0)
+    scared = (255,153,0)
     
-# nfc_to_emotion = {
-#     tag: Emotion.first,
-#     tag2: Emotion.second,
-# }
+nfc_to_emotion = {
+    '1068074383812618542': Emotion.joyful,
+    '1068074695311318642': Emotion.powerful,
+    '10680742317017110438': Emotion.peaceful,
+    '106807420523812518542': Emotion.sad,
+    '106807423923216710438': Emotion.mad,
+    '10680741091911318642': Emotion.scared
+}
 
 # ALSO NEED ENUM EMOTION TO COLOR

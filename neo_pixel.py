@@ -4,7 +4,7 @@ from typing import Union
 import board
 import neopixel
 
-from config import number_of_leds, number_of_led_in_circle, Day
+from config import number_of_leds, number_of_led_in_circle, Day, Emotion
 
 pixels = neopixel.NeoPixel(board.D18, number_of_leds) # 84 is number of LEDs
 
