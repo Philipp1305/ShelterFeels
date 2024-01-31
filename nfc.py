@@ -10,5 +10,6 @@ class NFC:
     def read_single(self):
         return self.nfc.read()
 
-
-nfc = NFC()
+if __name__ == "__main__":
+    nfc = NFC()
+    print(nfc.read_single())

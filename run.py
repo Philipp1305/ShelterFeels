@@ -1,7 +1,5 @@
-from gui.main import main
-# from voice_recognition_app.inference_remote import extract_key_words_online
-from voice_recognition_app.inference_local import extract_key_words_audio
-
+from gui.main_window import build_the_main_window
+from voice_recognition_app.inference_remote import extract_key_words_online
 
 def run():
     # kw = extract_key_words_online()
@@ -12,7 +10,7 @@ def run():
     '''
 
     # TODO: clean up directories
-    main()
+    build_the_main_window()
 
 
 if __name__ == "__main__":
