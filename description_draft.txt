@@ -1,9 +1,0 @@
-In an empty room sits a empty person, quietly. They feel a messy something, but know not what it is or how to express it.
-Pinpointing and expressing emotions are skills which are often important, yet they are seldom taught. Shelterfeels is an
-attempt allow people to develop these skills for themselves, without -
-
-----
-
-Sprache und Emotionen hängen sehr eng zusammen. Was wir mit Worten nicht beschreiben können, können wir auch nur schwer einordnen und verstehen. Wenn wir lernen Gefühle zu benennen, werden wir besser darin, diese bei uns selbst wahrzunehmen und die Gefühle anderer zu lesen. Die differenzierte Unterscheidung von Gefühlen will jedoch geübt werden. ShelterFeels ist ein Hilfsmittel zur täglichen Reflexion über die eigenen Emotionen. Auf spielerische Weise soll ShelterFeels dabei helfen den emotionalen Wortschatz zu vergrößern. 
-
-Nachdem man ShelterFeels von den Ereignissen des Tages berichtet hat, werden einem einige Worte aus dem Erzählten zurückgespiegelt und auf dem Screen in der Mitte angezeigt. Um das Wort mit einer Emotion zu verknüpfen, muss man lediglich einen der Emotions-Token in die Mitte legen. Durch die LED-Anzeige im Deckel lässt sich nachvollziehen, welche Emotionen in den vergangenen Tagen präsent waren.
