@@ -9,17 +9,18 @@ from tkinter import Tk
 def build_the_main_window():
     '''builds a root window. all other functions follow afterwards'''
 
-    width_height = style.deafault_window_size
+    width_height = style.default_window_size
 
     root = Tk()
     root.configure(bg=style.default_background)
     root.resizable(False, False)
 
-    # root.overrideredirect(True)
+    root.overrideredirect(True)
 
-    root.attributes("-fullscreen", True)
-    root.bind("<Escape>", lambda x: root.attributes("-fullscreen", False))
-    # root.geometry(f'{width_height}x{width_height}')
+    # root.attributes("-fullscreen", True)
+    # root.bind("<Button-3>", lambda x: root.attributes("-fullscreen", False))
+    # root.bind("<Button-2>", lambda x: root.attributes("-fullscreen", False))
+    root.geometry(f'{width_height}x{width_height}')
 
     center_window(root)
     words.label = insert_label('ShelterFeels', root)

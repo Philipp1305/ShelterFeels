@@ -5,8 +5,8 @@ class Style:
     default_background = 'grey'
     default_text_font = 'Robot Mono'
     default_text_color = 'black'
-    default_text_size = 30
-    deafault_window_size = 450
+    default_text_size = 45
+    default_window_size = 480
 
 
 style = Style()

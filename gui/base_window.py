@@ -12,11 +12,11 @@ def center_window(window: Tk) -> None:
     width = window.winfo_width()
     
     height = window.winfo_height()
-    titlebar_height = window.winfo_rooty() - window.winfo_y()
-    frm_width = window.winfo_rootx() - window.winfo_x()
-    actual_height = height + titlebar_height + frm_width
+    # titlebar_height = window.winfo_rooty() - window.winfo_y()
+    # frm_width = window.winfo_rootx() - window.winfo_x()
+    # actual_height = height + titlebar_height + frm_width
 
-    x = int(window.winfo_screenwidth()/2 - width/2)
-    y = int(window.winfo_screenheight()/2 - actual_height/2)
+    x = int(round(window.winfo_screenwidth()/2 - width/2))
+    y = int(round(window.winfo_screenheight()/2 - height/2))
 
     window.geometry(f'{width}x{height}+{x}+{y}')
