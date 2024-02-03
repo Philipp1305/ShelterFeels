@@ -17,6 +17,7 @@ class Funky:
         'WORD',
         'WORD',
         'WORD',
+        'EXIT'
     ]
 
     def next_func(self, root: Tk) -> None:
@@ -56,10 +57,14 @@ class Funky:
                 selected_func = words.show_next_keyword
             case 'LED_ADJUST':
                 pass
+            case 'EXIT':
+                selected_func = self.quit_root
             case _:
                 pass
-                
 
         return selected_func
+    
+    def quit_root(self, root):
+        root.destroy()
 
 funky = Funky()
