@@ -10,7 +10,7 @@ def insert_label(label_text: str, window: Tk) -> Label:
     :return: tkinter Label object we just inserted
     '''
 
-    label = Label(window, text=label_text, font=(style.default_text_font, 18))
+    label = Label(window, text=label_text, font=(style.default_text_font, style.default_text_size))
     label.config(bg=style.default_background)
 
     label_height = int(window.winfo_height()/2 - 30)

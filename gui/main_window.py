@@ -9,7 +9,7 @@ from tkinter import Tk
 def build_the_main_window():
     '''builds a root window. all other functions follow afterwards'''
 
-    width_height = 400
+    width_height = style.deafault_window_size
 
     root = Tk()
     root.configure(bg=style.default_background)

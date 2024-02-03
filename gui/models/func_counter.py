@@ -5,8 +5,8 @@ from dataclasses import dataclass
 from typing import Literal, Callable
 from tkinter import Tk
 
-from led_testing_for_photo import full_circle
-full_circle()
+# from led_testing_for_photo import full_circle
+# full_circle()
 
 @dataclass
 class Funky:
