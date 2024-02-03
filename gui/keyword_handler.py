@@ -1,4 +1,6 @@
-from gui.counter import counter
+from voice_recognition_app.inference_remote import extract_key_words_online
+from gui.models.func_counter import counter
+from gui.models.words import words
 
 from tkinter import Tk, Label
 from typing import List
@@ -20,42 +22,21 @@ def insert_label(label_text: str, window: Tk) -> Label:
     return label
 
 
-def next_button(label_text_list: List[str], label: Label, window: Tk) -> None:
+def show_next_keyword(window: Tk) -> None:
     '''
-    sets label text by iterating over list with a global variable i
-    :label_text_list: list of text we want to iterate over
-    :label: tkinter Label object
-    :canvas: tkinter Canvas object to change color
+    for adding the keywords extracted by voice_recognition inference
+    :param window: tkinter Tk root object
     '''
 
-    color = counter.loop_color()
-    window.configure(bg=color)
-    if color == 'blue':
-        label.config(fg='white')
-    else:
-        label.config(fg='black')
-
-    label.config(text=label_text_list[counter.button_count], bg=color)
-
-    counter.button_count += 1
-    if counter.button_count >= len(label_text_list):
-        counter.button_count = 0
-
-
-def add_keywords(window: Tk,
-                 keywords: List[str] = [
-    'Hello, ma baby!',
-    'Hello, ma honey!',
-    'Hello, ma ragtime gaaaaaal!',
-    'Send me a kiss by wire',
-    'Baby, my heart\'s on fire!',
-    ]
-    ) -> None:
-    '''for adding the keywords extracted by voice_recognition inference'''
-
-    label = insert_label(keywords[0], window)
+    label = insert_label(words.next_word(), window)
     label.config(bg='red')
 
-    window.bind("<Button-1>", lambda event: next_button(keywords, label, window))
-
     return
+
+
+def extract_words():
+    keywords = extract_key_words_online()
+    if not keywords:
+        print('ERROR. No keywords extracted')
+        return
+    words.words = keywords
