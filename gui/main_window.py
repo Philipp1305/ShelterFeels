@@ -1,4 +1,5 @@
 from gui.models.func_counter import funky
+from gui.config_gui import gui_settings
 from gui.base_window import center_window
 from tkinter import Tk
 
@@ -9,7 +10,7 @@ def build_the_main_window():
     width_height = 400
 
     root = Tk()
-    root.configure(bg='red')
+    root.configure(bg=gui_settings.default_background)
     root.resizable(False, False)
     root.overrideredirect(True)
 

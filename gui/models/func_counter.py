@@ -1,5 +1,5 @@
-from voice_recognition_app.inference_remote import extract_key_words_online
-from gui.keyword_handler import extract_words, show_next_keyword
+from gui.keyword_handler import extract_words
+from gui.models.words import words
 
 from dataclasses import dataclass
 from typing import Literal, Callable
@@ -9,15 +9,13 @@ from tkinter import Tk
 class Funky:
     func_count: int = 0
     func_list = [
-        'START',
-        'RECORD_START',
         'RECORD',
-        'RECORD_PROCESS',
         'WORD',
-        'LED_ADJUST'
+        'WORD',
     ]
 
     def next_func(self, root: Tk) -> None:
+        print('next func called')
         command = self.func_list[self.func_count]
         selected = self.select_func(command)
         selected(root)
@@ -45,7 +43,7 @@ class Funky:
             case 'RECORD_PROCESS':
                 pass
             case 'WORD':
-                selected_func = show_next_keyword
+                selected_func = words.show_next_keyword
             case 'LED_ADJUST':
                 pass
 
