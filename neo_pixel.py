@@ -4,12 +4,12 @@ from typing import Union
 import board
 import neopixel
 
-from config import number_of_leds, number_of_led_in_circle, Day, Emotion
+from config import number_of_leds, number_of_led_in_circle, Day, brightness_scale
 
 pixels = neopixel.NeoPixel(board.D18, number_of_leds) # 84 is number of LEDs
 
 def blink_color(color: tuple, time: int):
-    pixels.fill(color)
+    pixels.fill([x * brightness_scale for x in color])
     pixels.show()                
     sleep(1)
 
@@ -18,7 +18,7 @@ def blink_color(color: tuple, time: int):
     sleep(1)
     
 def one_pixel_fill(led_number: int, color: tuple, time: int):
-    pixels[led_number] = color
+    pixels[led_number] = [x * brightness_scale for x in color]
     pixels.show()                
     sleep(1)
 
@@ -51,7 +51,9 @@ def fill_circle(circle_number: Union[int, Day], colors: list[tuple[int, int, int
         if right > circle_number*number_of_led_in_circle + number_of_led_in_circle:
             right = circle_number*number_of_led_in_circle + number_of_led_in_circle
         for v in range(left, right): # set color
-            pixels[v] = color
+            pixels[v] = [x * brightness_scale for x in color]
+        if right == number_of_leds:
+            pixels[right] = [x * brightness_scale for x in color]
     pixels.show()
 
 if __name__ == "__main__":

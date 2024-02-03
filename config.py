@@ -11,19 +11,21 @@ class Day(Enum):
     sunday= 5
     saturday= 6
     
+brightness_scale = 0.1 # fomr 0 to 1
+    
 class Emotion(Enum):
-    '''joyful = (255, 246, 8)
-    powerful = (50, 148, 15)
+    joyful = (255, 246, 8)
+    powerful = (50, 200, 15)
     peaceful = (12, 102, 203)
-    sad = (150, 19, 198)
-    mad = (202 ,31 ,31)
-    scared = (243, 147, 50)'''
-    joyful = (136, 123, 8)
-    powerful = (50, 74, 15)
-    peaceful = (12, 51, 101)
-    sad = (75, 19, 100)
-    mad = (101 ,31 ,31)
-    scared = (80, 50, 9)    
+    sad = (150, 19, 220)
+    mad = (255 , 10, 0)
+    scared = (200, 67, 0)
+    '''joyful = (128, 123, 4)
+    powerful = (25, 74, 7)
+    peaceful = (6, 51, 101)
+    sad = (75, 9, 99)
+    mad = (101, 15 , 15)
+    scared = (178, 113, 15) '''   
 
 nfc_to_emotion = {
     '1068074383812618542': Emotion.joyful,
