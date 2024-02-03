@@ -12,10 +12,12 @@ class Funky:
         'RECORD',
         'WORD',
         'WORD',
+        'WORD',
     ]
 
     def next_func(self, root: Tk) -> None:
         print('next func called')
+        print(f'func count: {self.func_count}')
         command = self.func_list[self.func_count]
         selected = self.select_func(command)
         selected(root)
@@ -43,9 +45,13 @@ class Funky:
             case 'RECORD_PROCESS':
                 pass
             case 'WORD':
+                # NOTE: always call word an additional time to destroy the label
                 selected_func = words.show_next_keyword
             case 'LED_ADJUST':
                 pass
+            case _:
+                pass
+                
 
         return selected_func
 

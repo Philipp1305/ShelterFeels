@@ -15,8 +15,6 @@ class Words:
         print(self.counter)
         word = self.words[self.counter]
         self.counter += 1
-        if self.counter >= len(self.words):
-            self.counter = 0
         return word
 
 
@@ -25,12 +23,15 @@ class Words:
         for adding the keywords extracted by voice_recognition inference
         :param window: tkinter Tk root object
         '''
-        if not self.label:
-            self.label = insert_label(self.next_word(), window)
+        print(f'count: {self.counter}, words: {len(self.words)}')
+        if self.counter >= len(self.words):
+            self.counter=0
+            print('DESTROY')
+            self.label.destroy() # maybe mopve this destroy to start next function in pipeline
             return
 
-        if len(self.words) <= self.counter:
-            self.label.destroy()
+        if not self.label:
+            self.label = insert_label(self.next_word(), window)
             return
 
         switch_label_text(self.label, self.next_word())
