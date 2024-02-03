@@ -1,4 +1,4 @@
-from gui.config_gui import gui_settings
+from gui.style import style
 from tkinter import Tk, Label
 
 
@@ -10,8 +10,8 @@ def insert_label(label_text: str, window: Tk) -> Label:
     :return: tkinter Label object we just inserted
     '''
 
-    label = Label(window, text=label_text, font=(gui_settings.default_text_font, 18))
-    label.config(bg=gui_settings.default_background)
+    label = Label(window, text=label_text, font=(style.default_text_font, 18))
+    label.config(bg=style.default_background)
 
     label_height = int(window.winfo_height()/2 - 30)
     label.pack(pady=label_height) # TODO: absolute positions

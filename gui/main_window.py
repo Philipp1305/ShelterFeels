@@ -1,5 +1,5 @@
 from gui.models.func_counter import funky
-from gui.config_gui import gui_settings
+from gui.style import style
 from gui.base_window import center_window
 from tkinter import Tk
 
@@ -10,7 +10,7 @@ def build_the_main_window():
     width_height = 400
 
     root = Tk()
-    root.configure(bg=gui_settings.default_background)
+    root.configure(bg=style.default_background)
     root.resizable(False, False)
     root.overrideredirect(True)
 
@@ -19,6 +19,7 @@ def build_the_main_window():
 
     root.bind("<Button-1>", lambda event: funky.next_func(root))
 
+    root.after(10, funky.next_func(root))
     root.mainloop()
 
 
