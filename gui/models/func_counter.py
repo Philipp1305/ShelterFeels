@@ -4,9 +4,11 @@ from gui.models.words import words
 from dataclasses import dataclass
 from typing import Literal, Callable
 from tkinter import Tk
+from nfc_led_connection import read_nfc_and_change_led
 
 @dataclass
 class Funky:
+    next_screen = False
     func_count: int = 0
     func_list = [
         'RECORD',
@@ -20,10 +22,13 @@ class Funky:
         print(f'func count: {self.func_count}')
         command = self.func_list[self.func_count]
         selected = self.select_func(command)
-        selected(root)
+        self.next_screen = selected(root)
         self.func_count += 1
         if self.func_count >= len(self.func_list):
             self.func_count = 0
+        if self.next_screen:
+            self.next_func()
+
 
     def select_func(self, selector: Literal[
         'START',

@@ -1,7 +1,7 @@
 from gui.fancy_window_animations import insert_label, switch_label_text
 from dataclasses import dataclass
 from tkinter import Tk, Label
-
+from nfc_led_connection import read_nfc_and_change_led
 
 @dataclass
 class Words:
@@ -23,9 +23,13 @@ class Words:
         for adding the keywords extracted by voice_recognition inference
         :param window: tkinter Tk root object
         '''
+
         if not self.label:
             print('insert label')
             self.label = insert_label(self.next_word(), window)
+            print("HERE", self.label)
+            window.update()
+            read_nfc_and_change_led()
             return
 
         print(f'count: {self.counter}, words: {len(self.words)}')
@@ -35,9 +39,16 @@ class Words:
             self.label.destroy() # maybe mopve this destroy to start next function in pipeline
             self.label = None
             return
-
-
+        
         switch_label_text(self.label, self.next_word())
+        print("HERE", self.label)
+        window.update()
+        read_nfc_and_change_led()
+        
         return
+    
+# def show_word(words, window: Tk):
+#     for word in words:
+        
 
 words = Words()
