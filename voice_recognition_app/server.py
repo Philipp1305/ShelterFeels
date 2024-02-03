@@ -2,9 +2,9 @@ import uvicorn as uvicorn
 from fastapi import FastAPI, UploadFile, File
 from inference_local import extract_key_words_text
 
-from config import records_folder
-from recognition.recognize import recognize_audio_file
-from utils import save_upload_file
+from voice_recognition_app.config import records_folder, server_port
+from voice_recognition_app.recognition.recognize import recognize_audio_file
+from voice_recognition_app.utils import save_upload_file
 
 app = FastAPI()
 
@@ -19,6 +19,7 @@ def extract_key_words_endpoint(file: UploadFile = File(...)):
     with open(records_folder / f"{audiofile.stem}.txt", "w", encoding="utf-8") as f:
         f.write(text)
     keywords = extract_key_words_text(text)
+    print("Post processed keywords:", keywords)
     return keywords
 
 
@@ -28,7 +29,5 @@ def liveness_check():
 
 
 if __name__ == "__main__":
-    host = "0.0.0.0"
-    port = 8000
-    print(f'Service is listening on {host}:{port}')
-    uvicorn.run(app, host=host, port=port)
+    print(f'Service is listening on {server_port}')
+    uvicorn.run(app, host="0.0.0.0", port=server_port)

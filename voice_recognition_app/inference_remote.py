@@ -22,6 +22,9 @@ def extract_key_words_online() -> List[str]:
 
 def send_post(file) -> List[str]:
     res = requests.post(url, files={'file': open(file, 'rb')})
+    if res.status_code != 200:
+        print("Connection is unavailable")
+        return []
     return res.json()
 
 
