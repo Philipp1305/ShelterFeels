@@ -26,6 +26,7 @@ def build_the_main_window():
     words.label = insert_label('ShelterFeels', root)
 
     root.bind("<Button-1>", lambda event: funky.next_func(root))
+    root.config(cursor="none")
 
     root.after(10, funky.next_func(root))
     root.mainloop()
