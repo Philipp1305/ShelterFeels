@@ -27,7 +27,7 @@ class Funky:
         if self.func_count >= len(self.func_list):
             self.func_count = 0
         if self.next_screen:
-            self.next_func()
+            self.next_func(root)
 
 
     def select_func(self, selector: Literal[

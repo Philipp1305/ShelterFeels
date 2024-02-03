@@ -30,7 +30,7 @@ class Words:
             print("HERE", self.label)
             window.update()
             read_nfc_and_change_led()
-            return
+            return True
 
         print(f'count: {self.counter}, words: {len(self.words)}')
         if self.counter >= len(self.words):
@@ -38,14 +38,14 @@ class Words:
             print('DESTROY')
             self.label.destroy() # maybe mopve this destroy to start next function in pipeline
             self.label = None
-            return
+            return True
         
         switch_label_text(self.label, self.next_word())
         print("HERE", self.label)
         window.update()
         read_nfc_and_change_led()
         
-        return
+        return True
     
 # def show_word(words, window: Tk):
 #     for word in words:

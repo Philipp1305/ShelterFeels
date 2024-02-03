@@ -23,7 +23,7 @@ class Emotion(Enum):
     peaceful = (12, 51, 101)
     sad = (75, 19, 100)
     mad = (101 ,31 ,31)
-    scared = (240, 145, 51)    
+    scared = (80, 50, 9)    
 
 nfc_to_emotion = {
     '1068074383812618542': Emotion.joyful,

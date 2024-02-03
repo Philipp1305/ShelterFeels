@@ -12,7 +12,7 @@ def read_nfc_and_change_led(*args):
     print(emotion)
     colors.append(emotion.value)
     print (colors)
-    fill_circle(weekday, colors)
+    # fill_circle(weekday, colors)
     pass # funky.next() in the end.
 
 def finish_day():
