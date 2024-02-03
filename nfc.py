@@ -6,11 +6,17 @@ from neo_pixel import fill_circle
 from datetime import datetime
 
 @dataclass
-class NFCHandler:    
-    nfc = PN532()
-    nfc.setup()
+class NFCHandler: 
+    try:   
+        nfc = PN532()
+        nfc.setup()
+    except Exception:
+        print("BAD NFC POORLY CONNECTED")
+        nfc = None
 
     def read_single(self):
+        if nfc is None:
+            raise Exception("NFC READER NOT CONNECTED")
         return ''.join([str(x) for x in self.nfc.read()])
 
 

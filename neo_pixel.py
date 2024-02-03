@@ -6,9 +6,15 @@ import neopixel
 
 from config import number_of_leds, number_of_led_in_circle, Day, brightness_scale
 
-pixels = neopixel.NeoPixel(board.D18, number_of_leds) # 84 is number of LEDs
+try:
+    pixels = neopixel.NeoPixel(board.D18, number_of_leds) # 84 is number of LEDs
+    print("bad led connection")
+except Exception:
+    pixels = None
 
 def blink_color(color: tuple, time: int):
+    if pixels is None:
+        return
     pixels.fill([x * brightness_scale for x in color])
     pixels.show()                
     sleep(1)
@@ -18,6 +24,8 @@ def blink_color(color: tuple, time: int):
     sleep(1)
     
 def one_pixel_fill(led_number: int, color: tuple, time: int):
+    if pixels is None:
+        return
     pixels[led_number] = [x * brightness_scale for x in color]
     pixels.show()                
     sleep(1)
@@ -27,6 +35,8 @@ def one_pixel_fill(led_number: int, color: tuple, time: int):
     sleep(1)
     
 def turn_off():
+    if pixels is None:
+        return
     pixels.fill((0,0,0))
     pixels.show()
     
@@ -38,6 +48,8 @@ def fill_circle(circle_number: Union[int, Day], colors: list[tuple[int, int, int
     colors - array of RGB tuples that should be displayed. Size not more than number_of_led_in_circle
     number_of_led_in_circle - number of LED in each circle
     """
+    if pixels is None:
+        return
     if len(colors) > number_of_led_in_circle:
         print(f"Bad number of colors = {len(colors)}, more than number_of_led_in_circle={number_of_led_in_circle}")
         return
