@@ -1,7 +1,7 @@
 from gui.fancy_window_animations import insert_label, switch_label_text
 from dataclasses import dataclass
 from tkinter import Tk, Label
-from nfc_led_connection import read_nfc_and_change_led
+# from nfc_led_connection import read_nfc_and_change_led
 
 @dataclass
 class Words:
@@ -29,7 +29,7 @@ class Words:
             self.label = insert_label(self.next_word(), window)
             print("HERE", self.label)
             window.update()
-            read_nfc_and_change_led()
+            # read_nfc_and_change_led()
             return True
 
         print(f'count: {self.counter}, words: {len(self.words)}')
@@ -43,8 +43,8 @@ class Words:
         switch_label_text(self.label, self.next_word())
         print("HERE", self.label)
         window.update()
-        read_nfc_and_change_led()
-        
+        # read_nfc_and_change_led()
+
         return True
     
 # def show_word(words, window: Tk):
