@@ -1,18 +1,28 @@
 # ShelterFeels
 
-ShelterFeels is a project involving RapsberryPi. The code here pertains to a specific object that can perform voice recognition and NFC tag reading. It has a simple gui user interface and, as feedback, controls neopixel LEDs.
+ShelterFeels is a project involving Rapsberry Pi. The code here pertains to a specific object that can perform voice recognition and NFC tag reading. It has a simple gui user interface and, as feedback, controls neopixel LEDs.
 
 The project was created by students as part of a collaboration between Freie Universität Berlin and Kunsthochschule Berlin-Weißensee.
 
 In emotriowheel you will find basic first attempts involving an Arduino.
 The shelterfeels directory contains the actual meat of project.
 
-## Installation and running
+
+## Installation and execution
 Installation will be difficult, because the code is closely connected to the physical object we build. That said, if you're willing to overcome a lot of hardware problems, we advice you to read and understand the code thoroughly before doing anything with it.
 
 You need python3.10 and the requirements listed in requirements.txt (which is yet incomplete). Doing `pip install -r requirments.txt` will get you there some of the way, but you are likely going to need some extra work to get some packages working.
 
 To run, simply execute run.py with python as sudo: `sudo python run.py`
+
+
+## Hardware
+- 2.8inch HDMI LCD (H) (SKU: 21316)
+- Raspberry Pi 4 Model B (4GB RAM)
+TODO:
+- nfc reader
+- microphone
+- LEDs
 
 ## Recognition app
 
