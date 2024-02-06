@@ -1,5 +1,4 @@
-from style import style
-# from gui.restructure.style import style
+from gui.style import style
 
 from tkinter import Tk, Label
 
@@ -15,9 +14,6 @@ def center_window(window: Tk) -> None:
     width = window.winfo_width()
     
     height = window.winfo_height()
-    # titlebar_height = window.winfo_rooty() - window.winfo_y()
-    # frm_width = window.winfo_rootx() - window.winfo_x()
-    # actual_height = height + titlebar_height + frm_width
 
     x = int(round(window.winfo_screenwidth()/2 - width/2))
     y = int(round(window.winfo_screenheight()/2 - height/2))

@@ -11,7 +11,7 @@ class Day(Enum):
     sunday= 5
     saturday= 6
     
-brightness_scale = 0.1 # fomr 0 to 1
+brightness_scale = 0.1 # from 0 to 1
     
 class Emotion(Enum):
     joyful = (255, 246, 8)

@@ -1,9 +1,6 @@
-from style import style
-from window_utility import center_window, insert_label, switch_label_text
-from slide_state import SlideState
-
-# from gui.restructure.style import style
-# from gui.restructure.window_utility import center_window, insert_label
+from gui.style import style
+from gui.window_utility import center_window, insert_label, switch_label_text
+from gui.slide_state import SlideState
 
 from tkinter import Tk
 from time import sleep
@@ -15,29 +12,32 @@ class MainWindow(Tk):
     label: Label
     word_list: List[str]
     nfc_process: Process
-
-     slide_state: SlideState
+    slide_state: SlideState
     '''
 
     def __init__(self):
         Tk.__init__(self) # tkinter uses old style classes
 
+        '''window configurations'''
         self.geometry(f'{style.default_window_size}x{style.default_window_size}')
         self.configure(bg=style.default_background)
 
+        self.config(cursor="none")
         self.resizable(False, False)
         if not style.has_titlebar:
             self.overrideredirect(True)
 
-        self.config(cursor="none")
-
         center_window(self)
-        self.label = insert_label('ShelterFeels', self) # intro animation here
+        window_label = insert_label('ShelterFeels', self) # any intro animation would go here
 
+        '''attributes'''
+        self.label = window_label
         self.slide_state = SlideState.START
+
         self.word_list = []
         self.nfc_process = None
 
+        '''interaction'''
         self.bind("<Button-1>", lambda event: self.next_slide())
         self.after(3000, self.next_slide)
 
@@ -48,6 +48,10 @@ class MainWindow(Tk):
 
 
     def next_slide(self):
+        '''
+        based on the current slide state, doe something and moves the state forward if needed
+        also checks for loose child processes and kills them
+        '''
         self.update_idletasks()
 
         if self.nfc_process is not None:
@@ -82,7 +86,6 @@ class MainWindow(Tk):
                 self.destroy()
 
 
-
     def check_process(self):
         if self.nfc_process is not None:
             if not self.nfc_process.is_alive():
@@ -93,7 +96,7 @@ class MainWindow(Tk):
 
 
 def thread_test():
-    print('thread')
+    print('thready mcthread thread')
     sleep(3)
     return
 
