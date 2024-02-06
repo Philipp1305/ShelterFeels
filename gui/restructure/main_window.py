@@ -1,22 +1,23 @@
 from style import style
 from window_utility import center_window, insert_label, switch_label_text
 from slide_state import SlideState
-from stoppable_thread import StoppableThread
 
 # from gui.restructure.style import style
 # from gui.restructure.window_utility import center_window, insert_label
 
-from typing import Set
-from tkinter import Tk, Label
+from tkinter import Tk
 from time import sleep
+from multiprocessing import Process
 
 
 class MainWindow(Tk):
-    slide_state: SlideState
+    '''
     label: Label
-    word_set: Set[str]
+    word_list: List[str]
+    nfc_process: Process
 
-    second_thread: StoppableThread
+     slide_state: SlideState
+    '''
 
     def __init__(self):
         Tk.__init__(self) # tkinter uses old style classes
@@ -31,44 +32,70 @@ class MainWindow(Tk):
         self.config(cursor="none")
 
         center_window(self)
+        self.label = insert_label('ShelterFeels', self) # intro animation here
 
-        self.label = insert_label('ShelterFeels', self)
         self.slide_state = SlideState.START
-        self.word_set = set()
-        self.second_thread = None
+        self.word_list = []
+        self.nfc_process = None
 
         self.bind("<Button-1>", lambda event: self.next_slide())
         self.after(3000, self.next_slide)
 
 
+    def first_slide(self):
+        if self.slide_state == SlideState.START:
+            self.next_slide()
+
+
     def next_slide(self):
-        print(self.slide_state.value)
-        if self.second_thread:
-            if not self.second_thread.stopped():
-                print('stopping thread')
-                self.second_thread.stop()
+        self.update_idletasks()
+
+        if self.nfc_process is not None:
+            if self.nfc_process.is_alive():
+                self.nfc_process.terminate()
 
         match self.slide_state:
             case SlideState.START:
                 switch_label_text(self.label, 'Start recording?')
                 self.slide_state = SlideState.RECORDING
+
             case SlideState.RECORDING:
-                
-                self.word_set.update(['hello', 'my', 'darling', 'red', 'blue', 'yellow', 'green'])
+                self.word_list += ['welcome', 'to', 'the', 'internet'] # recording and progressbar here
+                self.word_list.reverse()
+                switch_label_text(self.label, '... recording ...')
                 self.slide_state = SlideState.WORD
+
             case SlideState.WORD:
-                if self.word_set:
-                    word = self.word_set.pop()
-                    print(word)
-                    self.second_thread = StoppableThread(target=self.thread_test, daemon=True)
-                    self.second_thread.start()
-                    switch_label_text(self.label, word)
+                word = self.word_list.pop()
+                if not self.word_list:
+                    self.slide_state = SlideState.END
+                print(word)
+
+                switch_label_text(self.label, word)
+
+                self.nfc_process = Process(target=thread_test, daemon=True) # nfc reading here
+                self.nfc_process.start()
+                self.after_idle(self.check_process)
+
+            case SlideState.END:
+                switch_label_text(self.label, 'DONE')
+                self.destroy()
 
 
-    def thread_test(self):
-        print('thread')
-        sleep(10)
-        self.next_slide()
+
+    def check_process(self):
+        if self.nfc_process is not None:
+            if not self.nfc_process.is_alive():
+                self.nfc_process.terminate()
+                self.next_slide()
+            else:
+                self.after(200, self.check_process)
+
+
+def thread_test():
+    print('thread')
+    sleep(3)
+    return
 
 
 if __name__ == "__main__":

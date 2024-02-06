@@ -1,6 +1,8 @@
 from enum import Enum
 
 class SlideState(Enum):
-    START = 'START'
-    RECORDING = 'RECORDING'
-    WORD = 'WORD'
+    ZERO = 0 # possibly usefull für starting animations or something
+    START = 1
+    RECORDING = 2
+    WORD = 3
+    END = 4

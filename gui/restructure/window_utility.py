@@ -37,7 +37,7 @@ def insert_label(label_text: str, window: Tk) -> Label:
     label.config(bg=style.default_background)
 
     label_height = int(window.winfo_height()/2 - 30)
-    label.pack(pady=label_height) # TODO: absolute positions
+    label.pack(pady=label_height)
 
     return label
 
