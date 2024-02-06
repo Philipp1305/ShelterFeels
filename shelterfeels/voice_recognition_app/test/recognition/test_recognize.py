@@ -1,5 +1,5 @@
 from recognition.recognize import recognize_audio_file
-from config import records_folder
+from shelterfeels.nfc_led.config import records_folder
 
 
 def test_recognition():

@@ -1,4 +1,4 @@
-from gui.style import style
+from shelterfeels.gui.style import style
 
 from tkinter import Tk, Label
 

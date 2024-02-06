@@ -1,4 +1,9 @@
-tk
+# somewhat incomplete. they'res some very specific libraries we had to use
+
+# GUI
+tk # is incompatible with python3.12. also needs extra installation on linux, try: sudo apt-get install python3-tk
+
+# VOICE APP
 openai-whisper
 sounddevice
 soundfile

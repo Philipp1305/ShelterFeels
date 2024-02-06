@@ -1,4 +1,5 @@
 from enum import Enum
+
 number_of_leds = 84
 number_of_led_in_circle = 12
 

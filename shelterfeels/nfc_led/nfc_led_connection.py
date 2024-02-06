@@ -1,6 +1,8 @@
+from shelterfeels.nfc_led.nfc import read_emotion_from_nfc
+from shelterfeels.nfc_led.neo_pixel import fill_circle, turn_off
+
 from datetime import datetime
-from nfc import read_emotion_from_nfc
-from neo_pixel import fill_circle, turn_off
+
 
 colors = []
 def read_nfc_and_change_led(*args):

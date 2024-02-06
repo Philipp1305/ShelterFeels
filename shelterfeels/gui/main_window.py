@@ -1,6 +1,6 @@
-from gui.style import style
-from gui.window_utility import center_window, insert_label, switch_label_text
-from gui.slide_state import SlideState
+from shelterfeels.gui.window_utility import center_window, insert_label, switch_label_text
+from shelterfeels.gui.slide_state import SlideState
+from shelterfeels.gui.style import style
 
 from tkinter import Tk
 from time import sleep

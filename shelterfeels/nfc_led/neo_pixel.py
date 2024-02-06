@@ -1,10 +1,11 @@
+from shelterfeels.nfc_led.config import number_of_leds, number_of_led_in_circle, Day, brightness_scale
+
 from time import sleep
 from typing import Union
 
 import board
 import neopixel
 
-from config import number_of_leds, number_of_led_in_circle, Day, brightness_scale
 
 try:
     pixels = neopixel.NeoPixel(board.D18, number_of_leds) # 84 is number of LEDs

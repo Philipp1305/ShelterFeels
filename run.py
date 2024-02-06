@@ -1,4 +1,5 @@
-from gui import start_window
+from shelterfeels.gui import start_window
+
 
 def run():
     '''this function exists purely for conveniently starting the application'''
