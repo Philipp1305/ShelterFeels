@@ -1,0 +1,14 @@
+tk
+openai-whisper
+sounddevice
+soundfile
+scipy
+transformers
+sentencepiece
+pytest
+setuptools-rust
+nltk
+fastapi
+uvicorn
+python-multipart
+# ffmpeg in your system!!!
