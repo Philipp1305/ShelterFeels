@@ -36,7 +36,7 @@ class Words:
         if self.counter >= len(self.words):
             self.counter = 0
             print('DESTROY')
-            self.label.destroy() # maybe mopve this destroy to start next function in pipeline
+            self.label.destroy() # maybe move this destroy to start next function in pipeline
             self.label = None
             return True
         

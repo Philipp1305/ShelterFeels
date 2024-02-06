@@ -15,7 +15,7 @@ def build_the_main_window():
     root.configure(bg=style.default_background)
     root.resizable(False, False)
 
-    root.overrideredirect(True)
+    # root.overrideredirect(True)
 
     # root.attributes("-fullscreen", True)
     # root.bind("<Button-3>", lambda x: root.attributes("-fullscreen", False))
@@ -25,11 +25,14 @@ def build_the_main_window():
     center_window(root)
     words.label = insert_label('ShelterFeels', root)
 
-    root.bind("<Button-1>", lambda event: funky.next_func(root))
+    root.bind("<Button-1>", lambda event: funky.next_func())
     root.config(cursor="none")
 
-    root.after(10, funky.next_func(root))
+    funky.root = root
+
+    root.after(10, funky.next_func())
     root.mainloop()
+
 
 
 if __name__ == "__main__":

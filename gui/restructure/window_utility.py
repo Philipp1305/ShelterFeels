@@ -1,5 +1,28 @@
-from gui.style import style
+from style import style
+# from gui.restructure.style import style
+
 from tkinter import Tk, Label
+
+
+def center_window(window: Tk) -> None:
+    '''
+    centers a window on any screen (respects titlebar)
+    :param window: tkinter Tk object. should be a toplevel window, not a widget
+    '''
+
+    window.update_idletasks()
+
+    width = window.winfo_width()
+    
+    height = window.winfo_height()
+    # titlebar_height = window.winfo_rooty() - window.winfo_y()
+    # frm_width = window.winfo_rootx() - window.winfo_x()
+    # actual_height = height + titlebar_height + frm_width
+
+    x = int(round(window.winfo_screenwidth()/2 - width/2))
+    y = int(round(window.winfo_screenheight()/2 - height/2))
+
+    window.geometry(f'{width}x{height}+{x}+{y}')
 
 
 def insert_label(label_text: str, window: Tk) -> Label:
@@ -22,6 +45,3 @@ def insert_label(label_text: str, window: Tk) -> Label:
 def switch_label_text(label: Label, text: str):
     label.config(text=text)
 
-
-def destroy_label(label: Label) -> None:
-    label.destroy()
