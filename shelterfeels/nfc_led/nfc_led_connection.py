@@ -1,5 +1,5 @@
 from shelterfeels.nfc_led.nfc import read_emotion_from_nfc
-from shelterfeels.nfc_led.neo_pixel import fill_circle, turn_off, upload_current_state, load_state
+from shelterfeels.nfc_led.neo_pixel import fill_circle, turn_off, upload_day_state, load_state
 from shelterfeels.nfc_led.config import daynum_to_day
 from datetime import datetime
 
@@ -16,7 +16,7 @@ def read_nfc_and_change_led(*args):
     colors.append(emotion.value)
     print (colors)
     fill_circle(day, colors)
-    upload_current_state(weekday, colors)
+    upload_day_state(weekday, colors)
     pass # funky.next() in the end.
 
 def finish_day():

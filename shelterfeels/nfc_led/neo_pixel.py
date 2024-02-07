@@ -14,7 +14,7 @@ except Exception:
     print("bad led connection")
     pixels = None
 
-def upload_current_state(daynum, color):
+def upload_day_state(daynum, color):
     print("Uploading state", daynum, color)
     colors = json.load(open(json_path, "r"))
     colors[daynum] = color
@@ -98,4 +98,4 @@ if __name__ == "__main__":
     # fill_circle(Day.friday, [(0, 255, 0), (255, 0, 100), (100, 50,0)])
     # sleep(10)
     # turn_off()
-    upload_current_state()
+    upload_day_state()
