@@ -15,11 +15,9 @@ You need python3.10 and the requirements listed in requirements.txt (which is ye
 
 To run, simply execute run.py with python as sudo: `sudo python run.py`
 
-
 ## Hardware
 - 2.8inch HDMI LCD (H) (SKU: 21316)
 - Raspberry Pi 4 Model B (4GB RAM)
-TODO:
 - nfc reader
 - microphone
 - LEDs
@@ -40,8 +38,8 @@ The GUI is conceptualized as an object that shows different slide. Each slide ge
 
 ## NFC
 
--
+We use the library pn532 to read out NFCs. They return a unique list of numbers. The numbers themselves are unimportant, but the fact they are unique lets know which NFC chip was read. As part of ShelterFeels, we used a set of chips and gave each one meaning, associating it with one of 6 core emotions. So reading a chip gives one of 6 emotions as a return value.
 
 ## LED
 
--
+The LEDs are categorized by our 6 core emotion, each of which gets assigned an RGB color. For ShelterFeels we used 7 rings of neopixel LEDs and every day of the week was assigned one ring. The code looks up the current date and updates the rings life. Multiple calls will dynamically divide a ring into sections, so if you make the first call, the ring might be all red; a second all can turn the ring half red and half blue, a third call might result in a ring of 1 third red, 1 third blue and 1 third green and so on.
