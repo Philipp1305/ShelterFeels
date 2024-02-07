@@ -1,16 +1,29 @@
 from enum import Enum
+from pathlib import Path
 
 number_of_leds = 84
 number_of_led_in_circle = 12
+json_path = Path(__file__).parent.parent / "colors.json"
+todays_colors_json_path = Path(__file__).parent.parent / "todays_colors.json"
 
-class Day(Enum):
-    monday= 0
-    tuesday= 1
-    wendsday= 2
-    thursdat= 3
-    friday= 4
-    sunday= 5
-    saturday= 6
+class Day(Enum): # day to led number 
+    friday= 0
+    thursday= 1
+    saturday= 2
+    sunday= 3
+    monday= 4
+    wendsday= 5
+    tuesday= 6
+    
+daynum_to_day = {
+    "0": Day.monday,
+    "1": Day.tuesday,
+    "2": Day.wendsday,
+    "3": Day.thursday,
+    "4": Day.friday,
+    "5": Day.saturday,
+    "6": Day.sunday
+}
     
 brightness_scale = 0.1 # from 0 to 1
     

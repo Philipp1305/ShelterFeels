@@ -1,6 +1,7 @@
 from shelterfeels.gui.window_utility import center_window, insert_label, switch_label_text
 from shelterfeels.gui.slide_state import SlideState
 from shelterfeels.gui.style import style
+from shelterfeels.nfc_led.nfc_led_connection import read_nfc_and_change_led
 
 from tkinter import Tk
 from time import sleep
@@ -39,7 +40,7 @@ class MainWindow(Tk):
 
         '''interaction'''
         self.bind("<Button-1>", lambda event: self.next_slide())
-        self.after(3000, self.next_slide)
+        # self.after(3000, self.next_slide)
 
 
     def first_slide(self):
@@ -77,7 +78,7 @@ class MainWindow(Tk):
 
                 switch_label_text(self.label, word)
 
-                self.nfc_process = Process(target=thread_test, daemon=True) # nfc reading here
+                self.nfc_process = Process(target=read_nfc_and_change_led, daemon=True) # nfc reading here
                 self.nfc_process.start()
                 self.after_idle(self.check_process)
 

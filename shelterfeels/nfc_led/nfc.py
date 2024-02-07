@@ -15,7 +15,7 @@ class NFCHandler:
         nfc = None
 
     def read_single(self):
-        if nfc is None:
+        if self.nfc is None:
             raise Exception("NFC READER NOT CONNECTED")
         return ''.join([str(x) for x in self.nfc.read()])
 

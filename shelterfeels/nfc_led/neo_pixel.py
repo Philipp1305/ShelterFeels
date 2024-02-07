@@ -1,7 +1,8 @@
-from shelterfeels.nfc_led.config import number_of_leds, number_of_led_in_circle, Day, brightness_scale
+from shelterfeels.nfc_led.config import number_of_leds, number_of_led_in_circle, Day, brightness_scale, json_path, daynum_to_day
 
 from time import sleep
 from typing import Union
+import json
 
 import board
 import neopixel
@@ -9,9 +10,26 @@ import neopixel
 
 try:
     pixels = neopixel.NeoPixel(board.D18, number_of_leds) # 84 is number of LEDs
-    print("bad led connection")
 except Exception:
+    print("bad led connection")
     pixels = None
+
+def upload_current_state(daynum, color):
+    print("Uploading state", daynum, color)
+    colors = json.load(open(json_path, "r"))
+    colors[daynum] = color
+    print(colors)
+    with open(json_path, "w") as f:
+        json.dump(colors, f, indent=2)
+
+def load_state():
+    with open(json_path, "r") as f:
+        colors = json.load(f)
+        print("Loading state:", colors)
+        for daynum, color in colors.items():
+            fill_circle(daynum_to_day[daynum], color)
+    return colors
+           
 
 def blink_color(color: tuple, time: int):
     if pixels is None:
@@ -51,6 +69,8 @@ def fill_circle(circle_number: Union[int, Day], colors: list[tuple[int, int, int
     """
     if pixels is None:
         return
+    if len(colors) == 0:
+        colors = [(0,0,0)]
     if len(colors) > number_of_led_in_circle:
         print(f"Bad number of colors = {len(colors)}, more than number_of_led_in_circle={number_of_led_in_circle}")
         return
@@ -74,7 +94,8 @@ if __name__ == "__main__":
     # blink_color((255, 0, 50), 1)
     
     # one_pixel_fill(0, (0, 255, 0), 1)
-    fill_circle(Day.monday, [(0, 255, 0), (255, 0, 0), (0, 0, 255), (100, 50,0)])
-    fill_circle(Day.friday, [(0, 255, 0), (255, 0, 100), (100, 50,0)])
-    sleep(10)
-    turn_off()
+    # fill_circle(Day.monday, [(0, 255, 0), (255, 0, 0), (0, 0, 255), (100, 50,0)])
+    # fill_circle(Day.friday, [(0, 255, 0), (255, 0, 100), (100, 50,0)])
+    # sleep(10)
+    # turn_off()
+    upload_current_state()
