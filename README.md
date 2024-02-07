@@ -11,16 +11,16 @@ The shelterfeels directory contains the actual meat of project.
 ## Installation and execution
 Installation will be difficult, because the code is closely connected to the physical object we build. That said, if you're willing to overcome a lot of hardware problems, we advice you to read and understand the code thoroughly before doing anything with it.
 
-You need python3.10 and the requirements listed in requirements.txt (which is yet incomplete). Doing `pip install -r requirments.txt` will get you there some of the way, but you are likely going to need some extra work to get some packages working.
+You need **python3.10** and the requirements listed in requirements.txt (which is yet incomplete). Doing `pip install -r requirments.txt` will get you there some of the way, but you are likely going to need some extra work to get some packages working.
 
 To run, simply execute run.py with python as sudo: `sudo python run.py`
 
 ## Hardware
 - 2.8inch HDMI LCD (H) (SKU: 21316)
 - Raspberry Pi 4 Model B (4GB RAM)
-- nfc reader
-- microphone
-- LEDs
+- PN532 NFC NXP RFID-Modul (supports I2C)
+- iGOKU USB Mikrofon
+- Neopixel LEDs
 
 ## Recognition app
 
