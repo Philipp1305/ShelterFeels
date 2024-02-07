@@ -40,7 +40,7 @@ class MainWindow(Tk):
 
         '''interaction'''
         self.bind("<Button-1>", lambda event: self.next_slide())
-        # self.after(3000, self.next_slide)
+        self.after(3000, self.first_slide)
 
 
     def first_slide(self):
@@ -58,6 +58,8 @@ class MainWindow(Tk):
         if self.nfc_process is not None:
             if self.nfc_process.is_alive():
                 self.nfc_process.terminate()
+                print('thread terminated')
+                sleep(0.1)
 
         match self.slide_state:
             case SlideState.START:
@@ -77,19 +79,19 @@ class MainWindow(Tk):
                 print(word)
 
                 switch_label_text(self.label, word)
-
                 self.nfc_process = Process(target=read_nfc_and_change_led, daemon=True) # nfc reading here
                 self.nfc_process.start()
                 self.after_idle(self.check_process)
 
             case SlideState.END:
                 switch_label_text(self.label, 'DONE')
-                self.destroy()
+                self.after(2000, self.destroy)
 
 
     def check_process(self):
         if self.nfc_process is not None:
             if not self.nfc_process.is_alive():
+                print('thread terminated ')
                 self.nfc_process.terminate()
                 self.next_slide()
             else:

@@ -9,7 +9,7 @@ class Style:
     default_text_color = 'black'
     default_text_size = 45
     default_window_size = 480
-    has_titlebar = True
+    has_titlebar = False
 
 
 style = Style()
