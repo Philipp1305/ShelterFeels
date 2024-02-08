@@ -6,7 +6,7 @@ from datetime import datetime
 
 if __name__ == "__main__":
     for weekday in range(0, 7):
-        day = daynum_to_day[weekday]
+        day = daynum_to_day[str(weekday)]
         colors = []
         try:
             while True:

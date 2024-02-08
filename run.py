@@ -8,7 +8,7 @@ def run():
     '''this function exists purely for conveniently starting the application'''
     weekday = str(datetime.today().weekday())
     day = daynum_to_day[weekday]
-    upload_day_state(weekday, [])
+    # upload_day_state(weekday, [])
     load_state()
     start_window()
     turn_off()
