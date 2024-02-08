@@ -33,7 +33,7 @@ class MainWindow(Tk):
 
         '''attributes'''
         self.label = window_label
-        self.subtext_label = insert_label('click to proceed or wait', self, height_from_center = 10)
+        self.subtext_label = insert_label('click to proceed or wait', self, height_from_center = -20)
         self.slide_state = SlideState.START
 
         self.word_list = []
