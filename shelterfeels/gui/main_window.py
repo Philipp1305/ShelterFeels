@@ -84,7 +84,7 @@ class MainWindow(Tk):
 
             case SlideState.END:
                 switch_label_text(self.label, 'DONE', self.subtext_label, "see you tomorrow!")
-                self.after(2000, self.destroy)
+                # self.after(2000, self.destroy)
 
 
     def check_process(self):
