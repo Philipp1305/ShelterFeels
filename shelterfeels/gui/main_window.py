@@ -77,13 +77,13 @@ class MainWindow(Tk):
                     self.slide_state = SlideState.END
                 print(word)
 
-                switch_label_text(self.label, word, self.subtext_label, "Tag with an emotion token \nor touch to skip.")
+                switch_label_text(self.label, word, self.subtext_label, "tag with an emotion token \nor touch to skip")
                 self.nfc_process = Process(target=read_nfc_and_change_led, daemon=True) # nfc reading here
                 self.nfc_process.start()
                 self.after_idle(self.check_process)
 
             case SlideState.END:
-                switch_label_text(self.label, 'DONE', self.subtext_label, "See you tomorrow!")
+                switch_label_text(self.label, 'DONE', self.subtext_label, "see you tomorrow!")
                 self.after(2000, self.destroy)
 
 
