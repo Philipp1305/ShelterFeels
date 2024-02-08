@@ -30,10 +30,10 @@ def insert_label(label_text: str, window: Tk, height_from_center: int = 30) -> L
     '''
 
     label = Label(window, text=label_text, font=(style.default_text_font, style.default_text_size))
-    label.config(bg=style.default_background)
+    # label.config(bg=style.default_background)
 
     label_height = int(window.winfo_height()/2 - height_from_center)
-    label.pack(pady=label_height, side="left")
+    label.pack(pady=label_height)
 
     return label
 
