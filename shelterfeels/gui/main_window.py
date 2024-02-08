@@ -39,7 +39,7 @@ class MainWindow(Tk):
 
         '''interaction'''
         self.bind("<Button-1>", lambda event: self.next_slide())
-        self.after(3000, self.first_slide)
+        self.after(10000, self.first_slide)
 
 
     def first_slide(self):
@@ -84,7 +84,7 @@ class MainWindow(Tk):
 
             case SlideState.END:
                 switch_label_text(self.label, 'DONE', self.subtext_label, "see you tomorrow!")
-                # self.after(2000, self.destroy)
+                self.after(2000, self.destroy)
 
 
     def check_process(self):
