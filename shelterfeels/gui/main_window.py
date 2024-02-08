@@ -33,6 +33,7 @@ class MainWindow(Tk):
 
         '''attributes'''
         self.label = window_label
+        self.subtext_label = insert_label('click to proceed or wait', self, height_from_center = 10)
         self.slide_state = SlideState.START
 
         self.word_list = []
@@ -63,13 +64,13 @@ class MainWindow(Tk):
 
         match self.slide_state:
             case SlideState.START:
-                switch_label_text(self.label, 'Start recording?')
+                switch_label_text(self.label, 'Start recording?', self.subtext_label, "click to proceed")
                 self.slide_state = SlideState.RECORDING
 
             case SlideState.RECORDING:
                 self.word_list += ['welcome', 'to', 'the', 'internet'] # recording and progressbar here
                 self.word_list.reverse()
-                switch_label_text(self.label, '... recording ...')
+                switch_label_text(self.label, '... recording ...', self.subtext_label, "please speak to the device \nfor at least a minute")
                 self.slide_state = SlideState.WORD
 
             case SlideState.WORD:
@@ -78,13 +79,13 @@ class MainWindow(Tk):
                     self.slide_state = SlideState.END
                 print(word)
 
-                switch_label_text(self.label, word)
+                switch_label_text(self.label, word, self.subtext_label, "Tag with an emotion token or touch to skip.")
                 self.nfc_process = Process(target=read_nfc_and_change_led, daemon=True) # nfc reading here
                 self.nfc_process.start()
                 self.after_idle(self.check_process)
 
             case SlideState.END:
-                switch_label_text(self.label, 'DONE')
+                switch_label_text(self.label, 'DONE', self.subtext_label, "See you tomorrow!")
                 self.after(2000, self.destroy)
 
 
