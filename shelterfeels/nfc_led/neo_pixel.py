@@ -86,6 +86,7 @@ def fill_circle(circle_number: Union[int, Day], colors: list[tuple[int, int, int
             right = circle_number*number_of_led_in_circle + number_of_led_in_circle
             print("overflow")
         for v in range(left, right): # set color
+            sleep(0.1)
             pixels[v] = [x * brightness_scale for x in color]
     pixels.show()
 
