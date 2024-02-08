@@ -78,10 +78,15 @@ def fill_circle(circle_number: Union[int, Day], colors: list[tuple[int, int, int
         circle_number = circle_number.value
     print("Circle:", circle_number)
     each_color_quantity = number_of_led_in_circle // len(colors)
+    divide_mod = number_of_led_in_circle % len(colors)
+    left = circle_number*number_of_led_in_circle
+    right = circle_number*number_of_led_in_circle
     for num, color in enumerate(colors):
         print(f"color {num}/{len(colors)}")
-        left = circle_number*number_of_led_in_circle + num*each_color_quantity
-        right = circle_number*number_of_led_in_circle + (num+1)*each_color_quantity
+        left = right
+        right += (num+1)*each_color_quantity
+        if len(colors) - num >= divide_mod:
+            right+=1
         print(color, "left", left, "right", right)
         if right > circle_number*number_of_led_in_circle + number_of_led_in_circle:
             right = circle_number*number_of_led_in_circle + number_of_led_in_circle
