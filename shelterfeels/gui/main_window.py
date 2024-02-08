@@ -39,7 +39,7 @@ class MainWindow(Tk):
 
         '''interaction'''
         self.bind("<Button-1>", lambda event: self.next_slide())
-        self.after(10000, self.first_slide)
+        self.after(20000, self.first_slide)
 
 
     def first_slide(self):
