@@ -29,11 +29,9 @@ class MainWindow(Tk):
             self.overrideredirect(True)
 
         center_window(self)
-        window_label = insert_label('ShelterFeels', self) # any intro animation would go here
-
         '''attributes'''
-        self.label = window_label
-        self.subtext_label = insert_label('click to proceed or wait', self, height_from_center = -50)
+        self.label = insert_label('ShelterFeels', self, rely=0.4, relx=0.5) # any intro animation would go here
+        self.subtext_label = insert_label('click to proceed or wait', self, relx=0.5, rely = 0.6, type="subtext")
         self.slide_state = SlideState.START
 
         self.word_list = []
@@ -79,7 +77,7 @@ class MainWindow(Tk):
                     self.slide_state = SlideState.END
                 print(word)
 
-                switch_label_text(self.label, word, self.subtext_label, "Tag with an emotion token or touch to skip.")
+                switch_label_text(self.label, word, self.subtext_label, "Tag with an emotion token \nor touch to skip.")
                 self.nfc_process = Process(target=read_nfc_and_change_led, daemon=True) # nfc reading here
                 self.nfc_process.start()
                 self.after_idle(self.check_process)

@@ -21,20 +21,23 @@ def center_window(window: Tk) -> None:
     window.geometry(f'{width}x{height}+{x}+{y}')
 
 
-def insert_label(label_text: str, window: Tk, height_from_center: int = 30) -> Label:
+def insert_label(label_text: str, window: Tk, relx: float, rely: float, type: str = "") -> Label:
     '''
     gives you a singular semi centered text in the given window
     :param new_label: any string, preferably not too long
     :param window: tkinter Tk object. should be a toplevel window, not a widget
     :return: tkinter Label object we just inserted
     '''
-
-    label = Label(window, text=label_text, font=(style.default_text_font, style.default_text_size))
-    # label.config(bg=style.default_background)
-
-    label_height = int(window.winfo_height()/2 - height_from_center)
-    label.pack(pady=label_height)
-
+    if type == "subtext":
+        font_size = style.default_subtext_size
+    else:
+        font_size = style.default_text_size
+    label = Label(window, text=label_text, 
+                  font=(style.default_text_font, font_size),
+                  bg=style.default_background)
+    label.place(relx = relx, 
+                rely = rely,
+                anchor = 'center')
     return label
 
 
@@ -42,6 +45,6 @@ def switch_label_text(label: Label, text: str, subtext_label: Label = None, subt
     label.config(text=text)
     if subtext_label:
         if subtext:
-            subtext_label = (label.master)
+            subtext_label.config(text = subtext)
         else:
-            subtext_label.config(text=subtext_label)
+            subtext_label.config(text="")
