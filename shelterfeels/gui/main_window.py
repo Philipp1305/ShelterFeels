@@ -1,11 +1,11 @@
 from shelterfeels.gui.window_utility import center_window, insert_label, switch_label_text
 from shelterfeels.gui.slide_state import SlideState
 from shelterfeels.gui.style import style
-from shelterfeels.nfc_led.nfc_led_connection import read_nfc_and_change_led
+# from shelterfeels.nfc_led.nfc_led_connection import read_nfc_and_change_led
 
-from tkinter import Tk
+from tkinter import Tk, ttk
 from time import sleep
-from multiprocessing import Process
+from multiprocessing import Process, Manager
 
 
 class MainWindow(Tk):
@@ -34,12 +34,17 @@ class MainWindow(Tk):
         self.subtext_label = insert_label('click to proceed or wait', self, relx=0.5, rely = 0.6, type="subtext")
         self.slide_state = SlideState.START
 
-        self.word_list = []
+        manager = Manager()
+        self.word_list = manager.list()
         self.nfc_process = None
+
+        self.progress = None
+
 
         '''interaction'''
         self.bind("<Button-1>", lambda event: self.next_slide())
         self.after(20000, self.first_slide)
+
 
 
     def first_slide(self):
@@ -66,19 +71,45 @@ class MainWindow(Tk):
                 self.slide_state = SlideState.RECORDING
 
             case SlideState.RECORDING:
-                self.word_list += ['welcome', 'to', 'the', 'internet'] # recording and progressbar here
-                self.word_list.reverse()
-                switch_label_text(self.label, '... recording ...', self.subtext_label, "please speak to the device \nfor at least a minute")
+                switch_label_text(self.label, '', self.subtext_label, "please speak to the device \nfor at least a minute")
+
+                self.nfc_process = Process(target=thread_test_keywords, args=[self.word_list], daemon=True) # voice recording here
+                self.nfc_process.start()
+
+                s = ttk.Style()
+                s.theme_use('clam')
+                s.configure("bar.Horizontal.TProgressbar", foreground='red', background='red')
+                self.progress = progress = ttk.Progressbar(self, style="bar.Horizontal.TProgressbar", length=300, mode='determinate')
+                progress.place(rely=0.4, relx=0.2)
+                progress.start(60)
+
+                self.unbind("<Button-1>")
+                self.update()
+                while progress['value'] < 99:
+                    print(progress['value'])
+                    sleep(0.1)
+                    self.update()
+                s.configure("bar.Horizontal.TProgressbar", background='blue')
+                progress.stop()
+                progress['value'] = 100
+                self.update()
+                print(progress['value'])
+                self.bind("<Button-1>", lambda event: self.next_slide())
+
                 self.slide_state = SlideState.WORD
 
             case SlideState.WORD:
+
+                if self.progress:
+                    self.progress.destroy()
+
                 word = self.word_list.pop()
                 if not self.word_list:
                     self.slide_state = SlideState.END
                 print(word)
 
                 switch_label_text(self.label, word, self.subtext_label, "tag with an emotion token \nor touch to skip")
-                self.nfc_process = Process(target=read_nfc_and_change_led, daemon=True) # nfc reading here
+                self.nfc_process = Process(target=thread_test, daemon=True) # nfc reading here
                 self.nfc_process.start()
                 self.after_idle(self.check_process)
 
@@ -90,7 +121,7 @@ class MainWindow(Tk):
     def check_process(self):
         if self.nfc_process is not None:
             if not self.nfc_process.is_alive():
-                print('thread terminated ')
+                print('thread terminated')
                 self.nfc_process.terminate()
                 self.next_slide()
             else:
@@ -101,6 +132,12 @@ def thread_test():
     print('thready mcthread thread')
     sleep(3)
     return
+
+def thread_test_keywords(list):
+    # while True:
+    print('threads again')
+    list += ['hello', 'darkness']
+    sleep(1000)
 
 
 if __name__ == "__main__":

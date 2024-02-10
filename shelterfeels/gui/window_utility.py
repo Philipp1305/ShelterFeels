@@ -21,7 +21,7 @@ def center_window(window: Tk) -> None:
     window.geometry(f'{width}x{height}+{x}+{y}')
 
 
-def insert_label(label_text: str, window: Tk, relx: float, rely: float, type: str = "") -> Label:
+def insert_label(label_text: str, window: Tk, relx: float, rely: float, type: str = "", bg: str = style.default_background) -> Label:
     '''
     gives you a singular semi centered text in the given window
     :param new_label: any string, preferably not too long
@@ -34,7 +34,7 @@ def insert_label(label_text: str, window: Tk, relx: float, rely: float, type: st
         font_size = style.default_text_size
     label = Label(window, text=label_text, 
                   font=(style.default_text_font, font_size),
-                  bg=style.default_background)
+                  bg=bg)
     label.place(relx = relx, 
                 rely = rely,
                 anchor = 'center')
