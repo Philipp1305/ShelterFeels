@@ -4,7 +4,7 @@ from shelterfeels.gui.style import style
 from shelterfeels.nfc_led.nfc_led_connection import read_nfc_and_change_led
 
 from shelterfeels.voice_recognition_app.inference_remote import send_post
-from shelterfeels.voice_recognition_app.inference_local import extract_key_words_local
+# from shelterfeels.voice_recognition_app.inference_local import extract_key_words_local
 from shelterfeels.voice_recognition_app.recognition.audio_utils import record_until_interrupt
 from shelterfeels.voice_recognition_app.config import records_folder
 
@@ -187,7 +187,7 @@ def thread_test_keywords(string, list):
     print(string.value)
     if string.value == 'file.name':
         print('yes')
-        list += ['parents', 'university', 'exams', 'cat']
+        list += reversed(['parents', 'university', 'exams', 'cat'])
     sleep(10)
 
 
