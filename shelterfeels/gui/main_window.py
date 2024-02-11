@@ -142,7 +142,7 @@ class MainWindow(Tk):
                 instruction = dedent('''
                                     Grab an emotion token,
                                     hold it beneath the screen or
-                                    touch the screen to skip.)
+                                    touch the screen to skip.
                                     ''')[1:]
                 switch_label_text(self.label, '', self.subtext_label, instruction)
 
