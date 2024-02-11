@@ -132,7 +132,7 @@ class MainWindow(Tk):
                                     Next you will see the words
                                     form your day.
                                     Think about how they make you feel.
-                                    ''')[:-1]
+                                    ''')[1:]
                 self.subtext_label.config(pady=0)
                 switch_label_text(self.label, '', self.subtext_label, instruction)
                 self.slide_state = SlideState.WORDEXPLAINTWO
@@ -143,7 +143,7 @@ class MainWindow(Tk):
                                     Grab an emotion token,
                                     hold it beneath the screen or
                                     touch the screen to skip.)
-                                    ''')[:-1]
+                                    ''')[1:]
                 switch_label_text(self.label, '', self.subtext_label, instruction)
 
                 self.slide_state = SlideState.WORD
