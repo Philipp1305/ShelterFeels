@@ -124,7 +124,6 @@ class MainWindow(Tk):
                 self.after_idle(self.check_process)
 
 
-
             case SlideState.WORDEXPLAINONE:
                 self.bind("<Button-1>", lambda event: self.next_slide())
 
@@ -133,18 +132,18 @@ class MainWindow(Tk):
                                     Next you will see the words
                                     form your day.
                                     Think about how they make you feel.
-                                    ''')
-                self.subtext_label.config(pady=0.3)
+                                    ''')[:-1]
+                self.subtext_label.config(pady=0)
                 switch_label_text(self.label, '', self.subtext_label, instruction)
                 self.slide_state = SlideState.WORDEXPLAINTWO
 
             case SlideState.WORDEXPLAINTWO:
 
                 instruction = dedent('''
-                                    Grab a tag with the closest emotion,
-                                    hold it underneath the screen or
-                                    touch the screen to skip a word.)
-                                    ''')
+                                    Grab an emotion token,
+                                    hold it beneath the screen or
+                                    touch the screen to skip.)
+                                    ''')[:-1]
                 switch_label_text(self.label, '', self.subtext_label, instruction)
 
                 self.slide_state = SlideState.WORD
