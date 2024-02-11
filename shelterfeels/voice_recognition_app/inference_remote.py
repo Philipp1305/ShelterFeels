@@ -1,5 +1,6 @@
 from typing import List
 from datetime import datetime
+from multiprocessing.managers import ListProxy
 import requests
 
 from voice_recognition_app.recognition.audio_utils import record_until_interrupt
@@ -20,12 +21,15 @@ def extract_key_words_online() -> List[str]:
     return send_post(str(audiofile))
 
 
-def send_post(file) -> List[str]:
+def send_post(file, list: ListProxy = []) -> List[str]:
     res = requests.post(url, files={'file': open(file, 'rb')})
     if res.status_code != 200:
         print("Connection is unavailable")
         return []
-    return res.json()
+    response = res.json()
+    if response:
+        list += response
+    return response
 
 
 if __name__ == "__main__":

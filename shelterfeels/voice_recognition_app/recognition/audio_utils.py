@@ -1,6 +1,7 @@
 import queue
 import sys
 from datetime import datetime
+from ctypes import c_char_p
 
 import sounddevice as sd
 import soundfile as sf
@@ -32,8 +33,9 @@ def callback(indata, frames, time, status):
     q.put(indata.copy())
 
 
-def record_until_interrupt(rate: int = 44100):
+def record_until_interrupt(rate: int = 44100, string: c_char_p = None):
     filename = records_folder / f'{datetime.now().strftime("%Y %m %d - %H-%M-%S")}.wav'
+    if string: string.value = filename
     try:
         with sf.SoundFile(str(filename), mode='x', channels=number_of_audio_channels_in, samplerate=rate) as file:
             with sd.InputStream(callback=callback, samplerate=rate):
