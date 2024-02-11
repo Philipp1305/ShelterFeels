@@ -134,9 +134,11 @@ class MainWindow(Tk):
                                     you used to describe your day.
                                     think on how they make you feel,
                                     grab the corresponding tag
-                                    and hold it underneath the screen'''
+                                    and hold it underneath the screen.
+                                    to skip, touch the screen
+                                    '''
                                     )
-                switch_label_text(self.label, 'complete', self.subtext_label, instruction)
+                switch_label_text(self.label, '', self.subtext_label, instruction)
                 self.slide_state = SlideState.WORD
 
 
@@ -187,7 +189,7 @@ def thread_test_keywords(string, list):
     print(string.value)
     if string.value == 'file.name':
         print('yes')
-        l = ['parents', 'university', 'exams', 'cat']
+        l = ['parents', 'university', 'exams', 'training']
         l.reverse()
         list += l
     sleep(10)
