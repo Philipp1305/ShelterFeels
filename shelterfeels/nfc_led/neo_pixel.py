@@ -29,6 +29,9 @@ def load_state():
         for daynum, color in colors.items():
             fill_circle(daynum_to_day[daynum], color)
     return colors
+
+def load_state_file():
+    return json.load(open(json_path, "r"))
            
 
 def blink_color(color: tuple, time: int):
