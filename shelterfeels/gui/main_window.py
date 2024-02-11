@@ -140,7 +140,10 @@ class MainWindow(Tk):
 
 
             case SlideState.WORD:
-                word = self.word_list.pop()
+                if self.word_list:
+                    word = self.word_list.pop()
+                else:
+                    word = 'failed to read words'
                 if not self.word_list:
                     self.slide_state = SlideState.END
                 print(word)

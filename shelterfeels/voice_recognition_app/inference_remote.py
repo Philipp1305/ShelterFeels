@@ -22,6 +22,7 @@ def extract_key_words_online() -> List[str]:
 
 
 def send_post(file, list: ListProxy = []) -> List[str]:
+    print('sending ...')
     try:
         res = requests.post(url, files={'file': open(file, 'rb')})
     except requests.exceptions.HTTPError as e:
