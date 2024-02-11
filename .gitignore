@@ -4,3 +4,5 @@
 recordings/
 *.idea*
 *.pytest_cache*
+
+shelterfeels_state_chart.png
