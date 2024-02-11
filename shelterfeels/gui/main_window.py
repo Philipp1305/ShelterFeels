@@ -4,6 +4,7 @@ from shelterfeels.gui.style import style
 from shelterfeels.nfc_led.nfc_led_connection import read_nfc_and_change_led
 
 from shelterfeels.voice_recognition_app.inference_remote import send_post
+from shelterfeels.voice_recognition_app.inference_local import extract_key_words_local
 from shelterfeels.voice_recognition_app.recognition.audio_utils import record_until_interrupt
 from shelterfeels.voice_recognition_app.config import records_folder
 
@@ -79,7 +80,7 @@ class MainWindow(Tk):
             case SlideState.RECORDING:
                 switch_label_text(self.label, '', self.subtext_label, "please speak to the device \nfor at least a minute")
 
-                self.nfc_process = Process(target=record_until_interrupt, daemon=True) # voice recording here
+                self.nfc_process = Process(target=thread_test_recoding, daemon=True) # voice recording here
                 self.nfc_process.start()
 
                 s = ttk.Style()
@@ -114,7 +115,7 @@ class MainWindow(Tk):
                     self.progress.destroy()
 
                 filename = records_folder / 'recording.wav'
-                self.nfc_process = Process(target=send_post, args=[filename, self.word_list], daemon=True) # voice recording here
+                self.nfc_process = Process(target=thread_test_keywords, args=[filename, self.word_list], daemon=True) # voice recording here
                 self.nfc_process.start()
 
                 switch_label_text(self.label, 'processing...', self.subtext_label, "this should only take a few seconds")
@@ -186,7 +187,7 @@ def thread_test_keywords(string, list):
     print(string.value)
     if string.value == 'file.name':
         print('yes')
-        list += ['hello', 'darkness', 'my', 'old', 'friend']
+        list += ['parents', 'university', 'exams', 'cat']
     sleep(10)
 
 
