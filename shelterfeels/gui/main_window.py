@@ -1,7 +1,7 @@
 from shelterfeels.gui.window_utility import center_window, insert_label, switch_label_text
 from shelterfeels.gui.slide_state import SlideState
 from shelterfeels.gui.style import style
-# from shelterfeels.nfc_led.nfc_led_connection import read_nfc_and_change_led
+from shelterfeels.nfc_led.nfc_led_connection import read_nfc_and_change_led
 
 from tkinter import Tk, ttk
 from time import sleep
@@ -128,9 +128,9 @@ class MainWindow(Tk):
                                     think on how they make you feel,
                                     grab the corresponding tag
                                     and hold it underneath the screen'''
-                                    )[1:]
+                                    )
                 switch_label_text(self.label, 'complete', self.subtext_label, instruction)
-                self.slide_state = SlideState.WORDEXPLAIN
+                self.slide_state = SlideState.WORD
 
 
             case SlideState.WORD:
@@ -142,7 +142,7 @@ class MainWindow(Tk):
                 print(word)
 
                 switch_label_text(self.label, word, self.subtext_label, "tag with an emotion token \nor touch to skip")
-                self.nfc_process = Process(target=thread_test, daemon=True) # nfc reading here
+                self.nfc_process = Process(target=read_nfc_and_change_led, daemon=True) # nfc reading here
                 self.nfc_process.start()
                 self.after_idle(self.check_process)
 
