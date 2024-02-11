@@ -122,11 +122,13 @@ class MainWindow(Tk):
 
             case SlideState.WORDEXPLAIN:
 
-                instruction = dedent('''next you will see some of the words
-                you used to describe your day.
-                think on how they make you feel,
-                grab the corresponding tag
-                and hold it underneath the screen''')
+                instruction = dedent('''
+                                    next you will see some of the words
+                                    you used to describe your day.
+                                    think on how they make you feel,
+                                    grab the corresponding tag
+                                    and hold it underneath the screen'''
+                                    )[1:]
                 switch_label_text(self.label, 'complete', self.subtext_label, instruction)
                 self.slide_state = SlideState.WORDEXPLAIN
 
