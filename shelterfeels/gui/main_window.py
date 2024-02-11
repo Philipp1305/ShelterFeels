@@ -176,22 +176,18 @@ def thread_test():
     return
 
 
-def thread_test_recoding(string):
+def thread_test_recoding():
     print('recording process')
-    string.value += 'file.name'
     sleep(1000)
 
 
-def thread_test_keywords(string, list):
+def thread_test_keywords(file, list):
     # while True:
 
     print('threads again')
-    print(string.value)
-    if string.value == 'file.name':
-        print('yes')
-        l = ['parents', 'university', 'exams', 'training']
-        l.reverse()
-        list += l
+    l = ['parents', 'university', 'exams', 'training']
+    l.reverse()
+    list += l
     sleep(10)
 
 
