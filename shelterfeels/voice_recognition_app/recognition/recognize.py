@@ -1,7 +1,7 @@
 import whisper
 import torch
 
-from voice_recognition_app.config import whisper_model_name, whisper_model_language
+from shelterfeels.voice_recognition_app.config import whisper_model_name, whisper_model_language
 
 model = whisper.load_model(whisper_model_name)
 

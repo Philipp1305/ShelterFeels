@@ -7,7 +7,7 @@ import sounddevice as sd
 import soundfile as sf
 from scipy.io.wavfile import write
 
-from voice_recognition_app.config import records_folder, number_of_audio_channels_in
+from shelterfeels.voice_recognition_app.config import records_folder, number_of_audio_channels_in
 
 q = queue.Queue()
 
