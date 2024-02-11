@@ -107,6 +107,7 @@ class MainWindow(Tk):
 
 
             case SlideState.PLEASEWAIT:
+                self.unbind("<Button-1>")
                 if self.progress:
                     self.progress.destroy()
 
@@ -115,13 +116,14 @@ class MainWindow(Tk):
 
                 switch_label_text(self.label, 'processing...', self.subtext_label, "this should only take a few seconds")
 
-                self.update()
-                self.nfc_process.join()
+
                 self.slide_state = SlideState.WORDEXPLAIN
-                self.next_slide()
+                self.after_idle(self.check_process)
+
 
 
             case SlideState.WORDEXPLAIN:
+                self.bind("<Button-1>", lambda event: self.next_slide())
 
                 instruction = dedent('''
                                     next you will see some of the words
@@ -181,7 +183,7 @@ def thread_test_keywords(string, list):
     if string.value == 'file.name':
         print('yes')
         list += ['hello', 'darkness', 'my', 'old', 'friend']
-    sleep(6)
+    sleep(10)
 
 
 if __name__ == "__main__":
