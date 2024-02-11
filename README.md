@@ -3,7 +3,9 @@
 ShelterFeels is a project involving Rapsberry Pi, trying to create an object that can help people get in touch and document their emotions.
 
 1. [ Description ](#Description)
-1.1 [ Components ](#Components)
+    1. [ Hardware ](#Hardware)
+    2. [ Components ](#Components)
+    3. [ Workflow ](#Workflow)
 2. [ Installation ](#Installation)
 3. [ Usage ](#Usage)
 4. [ Acknowledgements ](#Acknowledgements)
@@ -16,14 +18,14 @@ The code here pertains to a specific object that can perform voice recognition a
 In emotriowheel you will find basic first attempts involving an Arduino.
 The shelterfeels directory contains the actual meat of project.
 
-### Components
-
-#### Hardware
+### Hardware
 - 2.8inch HDMI LCD (H) (SKU: 21316)
 - Raspberry Pi 4 Model B (4GB RAM)
 - PN532 NFC NXP RFID-Modul (supports I2C)
 - iGOKU USB Mikrofon
 - Neopixel LEDs
+
+### Components
 
 #### Recognition app
 
