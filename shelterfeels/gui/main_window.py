@@ -188,7 +188,8 @@ def thread_test_keywords(string, list):
     if string.value == 'file.name':
         print('yes')
         l = ['parents', 'university', 'exams', 'cat']
-        list += l.reverse()
+        l.reverse()
+        list += l
     sleep(10)
 
 
