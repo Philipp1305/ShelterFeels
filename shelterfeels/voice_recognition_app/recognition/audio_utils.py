@@ -36,7 +36,7 @@ def callback(indata, frames, time, status):
 def record_until_interrupt(rate: int = 44100):
     filename = records_folder / 'recording.wav'
     try:
-        with sf.SoundFile(str(filename), mode='x', channels=number_of_audio_channels_in, samplerate=rate) as file:
+        with sf.SoundFile(str(filename), mode='w+', channels=number_of_audio_channels_in, samplerate=rate) as file:
             with sd.InputStream(callback=callback, samplerate=rate):
                 print('#' * 80)
                 print('press Ctrl+C to stop the recording')
