@@ -2,7 +2,8 @@
 
 ShelterFeels is a project involving Rapsberry Pi, trying to create an object that can help people get in touch and document their emotions.
 
-1. [ Description. ](#Description)
+1. [ Description ](#Description)
+1.1 [ Components ](#Components)
 2. [ Installation ](#Installation)
 3. [ Usage ](#Usage)
 4. [ Acknowledgements ](#Acknowledgements)
