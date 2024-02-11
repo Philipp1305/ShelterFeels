@@ -37,7 +37,7 @@ class MainWindow(Tk):
 
         center_window(self)
         '''attributes'''
-        self.label = insert_label('ShelterFeels', self, rely=0.4, relx=0.5) # any intro animation would go here
+        self.label = insert_label('ShelterFeels', self, rely=0.4, relx=0.5)
         self.subtext_label = insert_label('click to proceed or wait', self, relx=0.5, rely = 0.6, type="subtext")
         self.slide_state = SlideState.START
 
@@ -182,7 +182,6 @@ def thread_test_recoding():
 
 
 def thread_test_keywords(file, list):
-    # while True:
 
     print('threads again')
     l = ['parents', 'university', 'exams', 'training']
