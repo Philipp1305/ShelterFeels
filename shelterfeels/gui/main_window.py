@@ -139,7 +139,7 @@ class MainWindow(Tk):
                                     Touch the screen to skip a word.
                                     '''
                                     )
-                self.subtext_label.config(pady=0.3)
+                self.subtext_label.config(pady=0.1)
                 switch_label_text(self.label, '', self.subtext_label, instruction)
                 self.slide_state = SlideState.WORD
 
