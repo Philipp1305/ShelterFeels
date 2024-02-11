@@ -6,6 +6,7 @@ from shelterfeels.gui.style import style
 from tkinter import Tk, ttk
 from time import sleep
 from multiprocessing import Process, Manager
+from ctypes import c_char_p
 
 
 class MainWindow(Tk):
@@ -36,6 +37,7 @@ class MainWindow(Tk):
 
         manager = Manager()
         self.word_list = manager.list()
+        self.filename = manager.Value(c_char_p, '')
         self.nfc_process = None
 
         self.progress = None
@@ -73,7 +75,7 @@ class MainWindow(Tk):
             case SlideState.RECORDING:
                 switch_label_text(self.label, '', self.subtext_label, "please speak to the device \nfor at least a minute")
 
-                self.nfc_process = Process(target=thread_test_keywords, args=[self.word_list], daemon=True) # voice recording here
+                self.nfc_process = Process(target=thread_test_recoding, args=[self.filename], daemon=True) # voice recording here
                 self.nfc_process.start()
 
                 s = ttk.Style()
@@ -96,12 +98,24 @@ class MainWindow(Tk):
                 print(progress['value'])
                 self.bind("<Button-1>", lambda event: self.next_slide())
 
+                self.slide_state = SlideState.PLEASEWAIT
+
+
+            case SlideState.PLEASEWAIT:
+                if self.progress:
+                    self.progress.destroy()
+
+                self.nfc_process = Process(target=thread_test_keywords, args=[self.filename, self.word_list], daemon=True) # voice recording here
+                self.nfc_process.start()
+
+                switch_label_text(self.label, 'processing...', self.subtext_label, "this should only take a few seconds")
+
+                self.after_idle(self.check_process)
+
                 self.slide_state = SlideState.WORD
 
             case SlideState.WORD:
 
-                if self.progress:
-                    self.progress.destroy()
 
                 word = self.word_list.pop()
                 if not self.word_list:
@@ -119,13 +133,12 @@ class MainWindow(Tk):
 
 
     def check_process(self):
-        if self.nfc_process is not None:
-            if not self.nfc_process.is_alive():
-                print('thread terminated')
-                self.nfc_process.terminate()
-                self.next_slide()
-            else:
-                self.after(200, self.check_process)
+        if not self.nfc_process.is_alive():
+            print('thread terminated')
+            self.nfc_process.terminate()
+            self.next_slide()
+        else:
+            self.after(200, self.check_process)
 
 
 def thread_test():
@@ -133,11 +146,22 @@ def thread_test():
     sleep(3)
     return
 
-def thread_test_keywords(list):
-    # while True:
-    print('threads again')
-    list += ['hello', 'darkness']
+
+def thread_test_recoding(string):
+    print('recording process')
+    string.value += 'file.name'
     sleep(1000)
+
+
+def thread_test_keywords(string, list):
+    # while True:
+
+    print('threads again')
+    print(string.value)
+    if string.value == 'file.name':
+        print('yes')
+        list += ['hello', 'darkness', 'my', 'old', 'friend']
+    sleep(10)
 
 
 if __name__ == "__main__":
