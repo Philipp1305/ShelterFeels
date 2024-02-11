@@ -2,9 +2,9 @@ import uvicorn as uvicorn
 from fastapi import FastAPI, UploadFile, File
 from inference_local import extract_key_words_text
 
-from voice_recognition_app.config import records_folder, server_port
-from voice_recognition_app.recognition.recognize import recognize_audio_file
-from voice_recognition_app.utils import save_upload_file
+from shelterfeels.voice_recognition_app.config import records_folder, server_port
+from shelterfeels.voice_recognition_app.recognition.recognize import recognize_audio_file
+from shelterfeels.voice_recognition_app.utils import save_upload_file
 
 app = FastAPI()
 

@@ -4,13 +4,12 @@ from shelterfeels.gui.style import style
 from shelterfeels.nfc_led.nfc_led_connection import read_nfc_and_change_led
 
 from shelterfeels.voice_recognition_app.inference_remote import send_post
-
 from shelterfeels.voice_recognition_app.recognition.audio_utils import record_until_interrupt
+from shelterfeels.voice_recognition_app.config import records_folder
 
 from tkinter import Tk, ttk
 from time import sleep
 from multiprocessing import Process, Manager
-from ctypes import c_char_p
 from textwrap import dedent
 from datetime import datetime
 
@@ -43,7 +42,6 @@ class MainWindow(Tk):
 
         manager = Manager()
         self.word_list = manager.list()
-        self.filename = manager.Value(c_char_p, '')
         self.nfc_process = None
 
         self.progress = None
@@ -81,7 +79,7 @@ class MainWindow(Tk):
             case SlideState.RECORDING:
                 switch_label_text(self.label, '', self.subtext_label, "please speak to the device \nfor at least a minute")
 
-                self.nfc_process = Process(target=record_until_interrupt, args=[self.filename], daemon=True) # voice recording here
+                self.nfc_process = Process(target=record_until_interrupt, daemon=True) # voice recording here
                 self.nfc_process.start()
 
                 s = ttk.Style()
@@ -115,7 +113,8 @@ class MainWindow(Tk):
                 if self.progress:
                     self.progress.destroy()
 
-                self.nfc_process = Process(target=send_post, args=[self.filename, self.word_list], daemon=True) # voice recording here
+                filename = records_folder / 'recording.wav'
+                self.nfc_process = Process(target=send_post, args=[filename, self.word_list], daemon=True) # voice recording here
                 self.nfc_process.start()
 
                 switch_label_text(self.label, 'processing...', self.subtext_label, "this should only take a few seconds")

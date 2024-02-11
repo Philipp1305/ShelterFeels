@@ -3,8 +3,8 @@ from datetime import datetime
 from multiprocessing.managers import ListProxy
 import requests
 
-from voice_recognition_app.recognition.audio_utils import record_until_interrupt
-from voice_recognition_app.config import url
+from shelterfeels.voice_recognition_app.recognition.audio_utils import record_until_interrupt
+from shelterfeels.voice_recognition_app.config import url
 
 
 def extract_key_words_online() -> List[str]:

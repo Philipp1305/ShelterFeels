@@ -1,10 +1,10 @@
 from typing import List
 from datetime import datetime
 
-from voice_recognition_app.recognition.recognize import recognize_audio_file
-from voice_recognition_app.recognition.audio_utils import record_until_interrupt
-from voice_recognition_app.text_processing.key_word_extractor import extract_key_words, postprocess_keywords
-from voice_recognition_app.config import records_folder
+from shelterfeels.voice_recognition_app.recognition.recognize import recognize_audio_file
+from shelterfeels.voice_recognition_app.recognition.audio_utils import record_until_interrupt
+from shelterfeels.voice_recognition_app.text_processing.key_word_extractor import extract_key_words, postprocess_keywords
+from shelterfeels.voice_recognition_app.config import records_folder
 
 
 def extract_key_words_audio() -> List[str]:
