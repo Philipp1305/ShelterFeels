@@ -120,7 +120,7 @@ class MainWindow(Tk):
                 switch_label_text(self.label, 'processing...', self.subtext_label, "this should only take a few seconds")
 
 
-                self.slide_state = SlideState.WORDEXPLAIN
+                self.slide_state = SlideState.WORDEXPLAINONE
                 self.after_idle(self.check_process)
 
 
@@ -133,8 +133,7 @@ class MainWindow(Tk):
                                     Next you will see the words
                                     form your day.
                                     Think about how they make you feel.
-                                    '''
-                                    )
+                                    ''')
                 self.subtext_label.config(pady=0.3)
                 switch_label_text(self.label, '', self.subtext_label, instruction)
                 self.slide_state = SlideState.WORDEXPLAINTWO
