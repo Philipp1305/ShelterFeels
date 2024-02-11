@@ -22,7 +22,7 @@ def extract_key_words_online() -> List[str]:
 
 
 def send_post(file, list: ListProxy = []) -> List[str]:
-    print('sending ...')
+    print('sending', file)
     try:
         res = requests.post(url, files={'file': open(file, 'rb')})
     except requests.exceptions.HTTPError as e:
@@ -31,6 +31,7 @@ def send_post(file, list: ListProxy = []) -> List[str]:
     if res.status_code != 200:
         print("Connection is unavailable")
         return []
+    print('Got result', res.status_code)
     response = res.json()
     if response:
         list += response
