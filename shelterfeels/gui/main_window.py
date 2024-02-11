@@ -7,6 +7,8 @@ from tkinter import Tk, ttk
 from time import sleep
 from multiprocessing import Process, Manager
 from ctypes import c_char_p
+from textwrap import dedent
+from datetime import datetime
 
 
 class MainWindow(Tk):
@@ -83,16 +85,19 @@ class MainWindow(Tk):
                 s.configure("bar.Horizontal.TProgressbar", foreground='red', background='red')
                 self.progress = progress = ttk.Progressbar(self, style="bar.Horizontal.TProgressbar", length=300, mode='determinate')
                 progress.place(rely=0.4, relx=0.2)
+                start = datetime.now()
                 progress.start(60)
 
                 self.unbind("<Button-1>")
                 self.update()
                 while progress['value'] < 99:
-                    print(progress['value'])
-                    sleep(0.1)
+                    # print(progress['value'])
+                    sleep(0.01)
                     self.update()
                 s.configure("bar.Horizontal.TProgressbar", background='blue')
                 progress.stop()
+                end = datetime.now()
+                print('real time: ', (end - start))
                 progress['value'] = 100
                 self.update()
                 print(progress['value'])
@@ -112,7 +117,19 @@ class MainWindow(Tk):
 
                 self.after_idle(self.check_process)
 
-                self.slide_state = SlideState.WORD
+                self.slide_state = SlideState.WORDEXPLAIN
+
+
+            case SlideState.WORDEXPLAIN:
+
+                instruction = dedent('''next you will see some of the words
+                you used to describe your day.
+                think on how they make you feel,
+                grab the corresponding tag
+                and hold it underneath the screen''')
+                switch_label_text(self.label, 'complete', self.subtext_label, instruction)
+                self.slide_state = SlideState.WORDEXPLAIN
+
 
             case SlideState.WORD:
 

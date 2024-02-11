@@ -1,9 +1,10 @@
-from enum import Enum
+from enum import Enum, auto
 
 class SlideState(Enum):
-    ZERO = 0 # possibly useful für starting animations or something
-    START = 1
-    RECORDING = 2
-    PLEASEWAIT = 3
-    WORD = 4
-    END = 5
+    ZERO = auto() # possibly useful für starting animations or something
+    START = auto()
+    RECORDING = auto()
+    PLEASEWAIT = auto()
+    WORDEXPLAIN = auto()
+    WORD = auto()
+    END = auto()
