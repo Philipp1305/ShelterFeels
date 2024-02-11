@@ -6,12 +6,13 @@ from datetime import datetime
 
 def run():
     '''this function exists purely for conveniently starting the application'''
-    weekday = str(datetime.today().weekday())
-    day = daynum_to_day[weekday]
-    upload_day_state(weekday, [])
-    load_state()
-    start_window()
-    turn_off()
+    while True:
+        weekday = str(datetime.today().weekday())
+        day = daynum_to_day[weekday]
+        upload_day_state(weekday, [])
+        load_state()
+        start_window()
+        turn_off()
 
 
 if __name__ == "__main__":
