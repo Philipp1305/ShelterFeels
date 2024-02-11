@@ -132,7 +132,7 @@ class MainWindow(Tk):
                 instruction = dedent('''
                                     Next you will see the words
                                     form your day.
-                                    Think how it makes you feel.
+                                    Think about how they make you feel.
                                     '''
                                     )
                 self.subtext_label.config(pady=0.3)
