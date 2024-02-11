@@ -115,6 +115,7 @@ class MainWindow(Tk):
 
                 switch_label_text(self.label, 'processing...', self.subtext_label, "this should only take a few seconds")
 
+                self.update()
                 self.nfc_process.join()
                 self.slide_state = SlideState.WORDEXPLAIN
                 self.next_slide()
