@@ -53,7 +53,6 @@ class MainWindow(Tk):
         self.after(20000, self.first_slide)
 
 
-
     def first_slide(self):
         if self.slide_state == SlideState.START:
             self.next_slide()
@@ -130,19 +129,23 @@ class MainWindow(Tk):
                 self.bind("<Button-1>", lambda event: self.next_slide())
 
                 instruction = dedent('''
-                                    next you will see some of the words
+                                    Next you will see some of the words
                                     you used to describe your day.
-                                    think on how they make you feel,
+                                    
+                                    Think on how they make you feel,
                                     grab the corresponding tag
                                     and hold it underneath the screen.
-                                    to skip, touch the screen
+                                    
+                                    Touch the screen to skip a word.
                                     '''
                                     )
+                self.subtext_label.config(pady=0.3)
                 switch_label_text(self.label, '', self.subtext_label, instruction)
                 self.slide_state = SlideState.WORD
 
 
             case SlideState.WORD:
+                self.subtext_label.config(pady=0.6)
                 if self.word_list:
                     word = self.word_list.pop()
                 else:
@@ -158,7 +161,7 @@ class MainWindow(Tk):
 
             case SlideState.END:
                 switch_label_text(self.label, 'DONE', self.subtext_label, "see you tomorrow!")
-                self.after(2000, self.destroy)
+                self.after(10000, self.destroy)
 
 
     def check_process(self):
