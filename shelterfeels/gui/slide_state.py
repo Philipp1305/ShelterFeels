@@ -5,6 +5,7 @@ class SlideState(Enum):
     START = auto()
     RECORDING = auto()
     PLEASEWAIT = auto()
-    WORDEXPLAIN = auto()
+    WORDEXPLAINONE = auto()
+    WORDEXPLAINTWO = auto()
     WORD = auto()
     END = auto()
