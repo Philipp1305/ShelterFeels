@@ -10,7 +10,7 @@ print("Device", device)
 
 server_port = 8000
 
-url = "http://10.147.19.228:8000/extract_key_words"
+url = "http://10.147.19.101:8000/extract_key_words"
 
 whisper_model_name = "base"
 whisper_model_language = "en"
