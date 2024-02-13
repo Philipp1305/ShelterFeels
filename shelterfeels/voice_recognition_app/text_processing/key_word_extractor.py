@@ -5,12 +5,14 @@ import nltk
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from transformers import T5Tokenizer, T5ForConditionalGeneration
+from shelterfeels.voice_recognition_app.config import device
 
 nltk.download("punkt")
 nltk.download("stopwords")
 nltk.download('averaged_perceptron_tagger')
 
 model = T5ForConditionalGeneration.from_pretrained("Voicelab/vlt5-base-keywords")
+model = model.to(device)
 tokenizer = T5Tokenizer.from_pretrained("Voicelab/vlt5-base-keywords", model_max_length=512)
 stop = set(stopwords.words('english') + list(string.punctuation))
 

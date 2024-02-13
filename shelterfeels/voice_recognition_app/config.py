@@ -1,8 +1,12 @@
 from pathlib import Path
 import sounddevice as sd
+from torch import cuda
 
 records_folder = Path(__file__).parent / "recordings"
 records_folder.mkdir(exist_ok=True, parents=True)
+
+device = 'cuda' if cuda.is_available() else 'cpu'
+print("Device", device)
 
 server_port = 8000
 

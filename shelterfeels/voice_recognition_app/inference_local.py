@@ -14,13 +14,15 @@ def extract_key_words_audio() -> List[str]:
     :return: list of strings with keywords
     """
     print("Recording! \nTo stop recording please enter Ctrl+C")
+    start = datetime.now()
     audiofile = record_until_interrupt()
-    return
+    processing_start = datetime.now()
+    print('Recording time:', (processing_start - start))
+    print("Processing...")
+    return extract_key_words_text(audiofile)
 
 
-def extract_key_words_text(audiofile: str, keywords_list=None) -> List[str]:
-    if keywords_list is None:
-        keywords_list = []
+def extract_key_words_text(audiofile: str) -> List[str]:
     start = datetime.now()
     processing_start = datetime.now()
     print("Processing...")
@@ -32,11 +34,10 @@ def extract_key_words_text(audiofile: str, keywords_list=None) -> List[str]:
         f.write(text)
     keywords_start = datetime.now()
     print('Recognition time:', (keywords_start - recognition_start))
-    keywords = extract_key_words_text(text)
-    keywords_list += keywords
+    keywords = extract_key_words_local(text)
     keywords_finish = datetime.now()
     print('Keyword extraction time:', (keywords_finish - keywords_start))
-    return keywords_list
+    return keywords
 
 
 def extract_key_words_local(text: str) -> List[str]:
