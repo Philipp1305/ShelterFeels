@@ -98,7 +98,7 @@ def fill_circle(circle_number: Union[int, Day], colors: list[tuple[int, int, int
             print(v)
             sleep(0.1)
             pixels[v] = [x * brightness_scale for x in color]
-    pixels.show()
+#    pixels.show()
 
 if __name__ == "__main__":
     # LED control
