@@ -13,10 +13,6 @@ def extract_key_words_endpoint(file: UploadFile = File(...)):
     print(file.filename)
     audiofile = save_upload_file(records_folder / file.filename, file)
     print(audiofile)
-    # text = recognize_audio_file(str(audiofile))
-    # print("Recognized text:", text)
-    # with open(records_folder / f"{audiofile.stem}.txt", "w", encoding="utf-8") as f:
-    #     f.write(text)
     keywords = extract_key_words_text(audiofile)
     print("Post processed keywords:", keywords)
     return keywords

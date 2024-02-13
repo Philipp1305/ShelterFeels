@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import List
 from datetime import datetime
 
@@ -22,7 +23,7 @@ def extract_key_words_audio() -> List[str]:
     return extract_key_words_text(audiofile)
 
 
-def extract_key_words_text(audiofile: str) -> List[str]:
+def extract_key_words_text(audiofile: Path) -> List[str]:
     start = datetime.now()
     processing_start = datetime.now()
     print("Processing...")
