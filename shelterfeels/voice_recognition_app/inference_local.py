@@ -30,7 +30,7 @@ def extract_key_words_text(audiofile: str) -> List[str]:
     print('Recording time:', (processing_start - start))
     text = recognize_audio_file(str(audiofile))
     print("Recognized text:", text)
-    with open(records_folder / f"{audiofile.stem}.txt", "w") as f:
+    with open(records_folder / f"{audiofile.stem}.txt", "w", encoding="utf-8") as f:
         f.write(text)
     keywords_start = datetime.now()
     print('Recognition time:', (keywords_start - recognition_start))
