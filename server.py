@@ -1,6 +1,6 @@
 import uvicorn as uvicorn
 from fastapi import FastAPI, UploadFile, File
-from inference_local import extract_key_words_text
+from shelterfeels.voice_recognition_app.inference_local import extract_key_words_text
 
 from shelterfeels.voice_recognition_app.config import records_folder, server_port
 from shelterfeels.voice_recognition_app.recognition.recognize import recognize_audio_file

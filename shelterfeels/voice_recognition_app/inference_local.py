@@ -3,7 +3,8 @@ from datetime import datetime
 
 from shelterfeels.voice_recognition_app.recognition.recognize import recognize_audio_file
 from shelterfeels.voice_recognition_app.recognition.audio_utils import record_until_interrupt
-from shelterfeels.voice_recognition_app.text_processing.key_word_extractor import extract_key_words, postprocess_keywords
+from shelterfeels.voice_recognition_app.text_processing.key_word_extractor import extract_key_words, \
+    postprocess_keywords
 from shelterfeels.voice_recognition_app.config import records_folder
 
 
@@ -17,7 +18,9 @@ def extract_key_words_audio() -> List[str]:
     return
 
 
-def extract_key_words_text(audiofile: str, list: ListProxy = []) -> List[str]:
+def extract_key_words_text(audiofile: str, keywords_list=None) -> List[str]:
+    if keywords_list is None:
+        keywords_list = []
     start = datetime.now()
     processing_start = datetime.now()
     print("Processing...")
@@ -30,9 +33,10 @@ def extract_key_words_text(audiofile: str, list: ListProxy = []) -> List[str]:
     keywords_start = datetime.now()
     print('Recognition time:', (keywords_start - recognition_start))
     keywords = extract_key_words_text(text)
-    list += keywords
+    keywords_list += keywords
     keywords_finish = datetime.now()
     print('Keyword extraction time:', (keywords_finish - keywords_start))
+    return keywords_list
 
 
 def extract_key_words_local(text: str) -> List[str]:
@@ -44,6 +48,7 @@ def extract_key_words_local(text: str) -> List[str]:
     print("Key words:", keywords)
     result = postprocess_keywords(keywords)
     return result
+
 
 if __name__ == "__main__":
     kw = extract_key_words_audio()
