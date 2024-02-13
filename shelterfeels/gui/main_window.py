@@ -50,6 +50,7 @@ class MainWindow(Tk):
 
         '''interaction'''
         self.bind("<Button-1>", lambda event: self.next_slide())
+        self.bind('<Escape>', lambda event: self.destroy())
         self.after(20000, self.first_slide)
 
 
