@@ -8,13 +8,13 @@ from multiprocessing import Process
 
 def run():
     '''this function exists purely for conveniently starting the application'''
-    while True:
-        weekday = str(datetime.today().weekday())
-        day = daynum_to_day[weekday]
-        upload_day_state(weekday, [])
-        Process(target=load_state, daemon=True).start()
-        start_window()
-        turn_off()
+    # while True:
+    weekday = str(datetime.today().weekday())
+    day = daynum_to_day[weekday]
+    upload_day_state(weekday, [])
+    Process(target=load_state, daemon=True).start()
+    start_window()
+    turn_off()
 
 
 if __name__ == "__main__":
