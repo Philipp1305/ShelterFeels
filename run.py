@@ -10,7 +10,8 @@ def run():
     # while True:
     weekday = str(datetime.today().weekday())
     upload_day_state(weekday, [])
-    Process(target=load_state, daemon=True).start()
+    # Process(target=load_state, daemon=True).start()
+    load_state()
     start_window()
     turn_off()
 
