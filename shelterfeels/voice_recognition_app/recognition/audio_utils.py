@@ -1,7 +1,6 @@
 import queue
 import sys
 from datetime import datetime
-from ctypes import c_char_p
 
 import sounddevice as sd
 import soundfile as sf

@@ -1,9 +1,9 @@
 import whisper
 import torch
 
-from shelterfeels.voice_recognition_app.config import whisper_model_name, whisper_model_language
+from shelterfeels.voice_recognition_app.config import whisper_model_name, whisper_model_language, device
 
-model = whisper.load_model(whisper_model_name)
+model = whisper.load_model(whisper_model_name, device=device)
 
 
 def recognize_audio_file(filepath: str) -> str:
@@ -12,7 +12,6 @@ def recognize_audio_file(filepath: str) -> str:
     :return: text from audio
     """
     print("Recognizing: ", filepath)
-
     if torch.cuda.is_available():
         result = model.transcribe(filepath, language=whisper_model_language)
     else:
