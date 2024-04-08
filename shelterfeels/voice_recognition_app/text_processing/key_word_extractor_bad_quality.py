@@ -13,7 +13,7 @@ nltk.download('averaged_perceptron_tagger')
 
 model = T5ForConditionalGeneration.from_pretrained("Voicelab/vlt5-base-keywords")
 model = model.to(device)
-tokenizer = T5Tokenizer.from_pretrained("Voicelab/vlt5-base-keywords", model_max_length=512)
+tokenizer = T5Tokenizer.from_pretrained("Voicelab/vlt5-base-keywords")
 stop = set(stopwords.words('english') + list(string.punctuation))
 
 task_prefix = "Keywords: "
@@ -28,7 +28,7 @@ def extract_key_words(text: str) -> str:
     input_sequences = [task_prefix + text]
     input_ids = tokenizer(input_sequences, return_tensors="pt", truncation=True).input_ids
     input_ids = input_ids.to(device)
-    output = model.generate(input_ids, no_repeat_ngram_size=3, num_beams=4, max_new_tokens=200, min_new_tokens=20)
+    output = model.generate(input_ids, no_repeat_ngram_size=3, num_beams=4, max_new_tokens=1000, min_new_tokens=30)
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
 
@@ -52,6 +52,7 @@ def postprocess_keywords(keywords: str, only_nouns=True) -> List[str]:
         tokens = nltk.word_tokenize(" ".join(words))
         tags = nltk.pos_tag(tokens)
         nouns = [word for word, pos in tags if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS')]
+        nouns = [x for x in nouns if len(x) > 2]
         words = nouns
         # no single-double letter words and add verbs 
     return words

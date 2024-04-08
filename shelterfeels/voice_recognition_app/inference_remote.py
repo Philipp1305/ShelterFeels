@@ -21,12 +21,15 @@ def extract_key_words_online() -> List[str]:
     return send_post(str(audiofile))
 
 
-def send_post(file, list: ListProxy = []) -> List[str]:
+def send_post(file, keywords_list=None) -> List[str]:
+    if keywords_list is None:
+        keywords_list = []
     print('sending', file, 'to', url)
     try:
         res = requests.post(url, files={'file': open(file, 'rb')})
     except requests.exceptions.HTTPError as e:
         print(e)
+        return keywords_list
 
     if res.status_code != 200:
         print("Connection is unavailable")
@@ -34,8 +37,8 @@ def send_post(file, list: ListProxy = []) -> List[str]:
     print('Got result', res.status_code)
     response = res.json()
     if response:
-        list += response
-    return response
+        keywords_list += response
+    return keywords_list
 
 
 if __name__ == "__main__":

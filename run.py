@@ -7,12 +7,12 @@ from shelterfeels.nfc_led.neo_pixel import load_state, turn_off, upload_day_stat
 
 def run():
     """this function exists purely for conveniently starting the application"""
-while True:
-    weekday = str(datetime.today().weekday())
-    upload_day_state(weekday, [])
-    Thread(target=load_state()).start()
-    start_window()
-    turn_off()
+    while True:
+        weekday = str(datetime.today().weekday())
+        upload_day_state(weekday, [])
+        Thread(target=load_state()).start()
+        start_window()
+        turn_off()
 
 
 if __name__ == "__main__":

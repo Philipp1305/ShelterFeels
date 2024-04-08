@@ -1,12 +1,11 @@
+from datetime import datetime
 from pathlib import Path
 from typing import List
-from datetime import datetime
 
-from shelterfeels.voice_recognition_app.recognition.recognize import recognize_audio_file
-from shelterfeels.voice_recognition_app.recognition.audio_utils import record_until_interrupt
-from shelterfeels.voice_recognition_app.text_processing.key_word_extractor import extract_key_words, \
-    postprocess_keywords
 from shelterfeels.voice_recognition_app.config import records_folder
+from shelterfeels.voice_recognition_app.recognition.audio_utils import record_until_interrupt
+from shelterfeels.voice_recognition_app.recognition.recognize import recognize_audio_file
+from shelterfeels.voice_recognition_app.text_processing.keyword_extractor_h1 import inference
 
 
 def extract_key_words_audio() -> List[str]:
@@ -46,10 +45,11 @@ def extract_key_words_local(text: str) -> List[str]:
     Extracts keywords from given text
     :return: list of strings with keywords
     """
-    keywords = extract_key_words(text)
+    keywords = inference(text)
     print("Key words:", keywords)
-    result = postprocess_keywords(keywords)
-    return result
+    # keywords = postprocess_keywords(keywords) # TODO make cool postprocessing
+    keywords = list(set(keywords.split(", ")))
+    return keywords
 
 
 if __name__ == "__main__":
